@@ -1,0 +1,62 @@
+ch. 1 of textbook
+
+Single precision (SP) - 32 bit
+Double precision (DP) - 64 bit
+
+
+Modern computer architecture techniques to improve throughput
+
+* pipeline - goal: to produce one result per cycle
+
+* superscalarity - goal: to produce more than one result per cycle. Need multiple
+  pipelines running in parallel
+
+* SIMD - important: wide registers - store many FP and is able to operate on them
+  simultaneously
+
+
+Memory hierarchy
+
+* CPU has access to registers without delay
+
+* Several levels (L) of cache holding copies of recently used data
+
+* Main memory, much slower to access
+
+
+Cache
+
+Caches are low-capacity, high-speed memories that are commonly integrated on
+the CPU die.
+
+* L1 (level 1) data cache
+* L1 instruction cache
+* L2 & L3 (data & instruction) unified caches
+
+Purpose: reduce impact of main memory's small bandwidth and high latency.
+
+Cache hit and miss. Hit if data is in L1 cache, miss if not. In case of miss, data
+must be fetched from upper cache level or worst-case main memory.
+
+If full cache: one of the occupant entries has to be evicted so new data item can be
+loaded. Typically following least-recently used strategy to give space
+
+Temporal locality: good if data items loaded into a cache are to be used again "soon enough"
+
+tau - speed ratio between cache and main memory, cache is a factor of tau faster than accessing main mëm.
+beta - probability of cache hit
+
+
+Cache lines
+A line has space for multiple data item, contigous in memory.
+Spatial locality: good if the probability of successive accesses to neighboring items is high
+
+
+Cache mapping
+* Fully associative mapping: line of data item from main mem. can be freely placed on any
+  unoccupied cache line
+
+* Directly mapped: a line of data items can be placed only on a prescribed cache line
+  - runs the risk of low cache utilization.
+
+* Partially associative mapping: combination
