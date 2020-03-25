@@ -1,2 +1,2 @@
-gcc ex3.c -o ex3 -lm
-./ex3
+gcc ex3.c -o ex3.x -lm
+./ex3.x
