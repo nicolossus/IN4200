@@ -70,6 +70,8 @@ int test_read_graph1()
 	printf("------------------------------\n");
 	printf("Graph file: 'test_graph.txt' located in data folder\n");
 
+	int passed_tests = 0;
+
 	char table2D_expected[8][8] = {
 		{0, 0, 0, 0, 0, 0, 1, 0},
 		{1, 0, 1, 1, 0, 0, 0, 0},
@@ -84,7 +86,6 @@ int test_read_graph1()
 	char **table2D;
 	int N;
 	int nedges=0;
-	int passed_tests = 0;
 
 
 	read_graph_from_file1("data/test_graph.txt", &N, &table2D);
