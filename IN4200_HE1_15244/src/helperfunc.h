@@ -1,0 +1,28 @@
+//=================================
+// Include guard
+#ifndef HELPERFUNC_H
+#define HELPERFUNC_H
+
+//=================================
+// Include dependencies
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+#include <omp.h>
+
+//=================================
+// Function prototypes
+//void printmat(char **A, int m, int n);
+void printmat(char **A, int m, int n){
+	for (size_t i = 0; i < m; ++i) {
+		printf("| ");
+		for (size_t j = 0; j < n; ++j) {
+			printf("%d ", A[i][j]);
+		}
+		printf("|\n");
+	}
+}
+
+
+#endif // __HELPERFUNC_H_INCLUDED__
