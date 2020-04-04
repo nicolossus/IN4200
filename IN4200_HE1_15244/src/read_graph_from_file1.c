@@ -2,7 +2,6 @@
 
 void read_graph_from_file1 (char *filename, int *N, char ***table2D){
 
-	char **table2D_tmp;
 	FILE *datafile;
 	int nedges, i, j;
 
@@ -18,21 +17,19 @@ void read_graph_from_file1 (char *filename, int *N, char ***table2D){
 	fscanf(datafile, "%*s %*s %d %*s %d \n", &*N, &nedges);  // Read 3rd line
 	fscanf(datafile, "%*[^\n]\n");                   // Skip 4th line
 
-
-	// Allocate 2D table
-	table2D_tmp = (char **)calloc((*N), sizeof(char*));
-	table2D_tmp[0] = (char *)calloc((*N), *N *sizeof(char));
+	// Allocate 2D table initialized with zeros
+	*table2D = (char **)calloc((*N), sizeof(char*));
+	*table2D[0] = (char *)calloc((*N), (*N)*sizeof(char));
 
 	for(size_t i = 0; i<(*N); i++) {
-		table2D_tmp[i] = &(table2D_tmp[0][(*N)*i]);
+		(*table2D)[i] = &((*table2D)[0][(*N)*i]);
 	}
 
-	// Fill
+	// Fill table with 1 if direct link from webpage j (outbound) to webpage i (inbound)
 	for (size_t k=0; k<nedges; k++) {
-		fscanf(datafile, "%d %d", &i, &j);
-		table2D_tmp[j][i] = 1;
+		fscanf(datafile, "%d %d", &j, &i);
+		(*table2D)[i][j] = 1;
 	}
 
-	*table2D = table2D_tmp;
 	fclose(datafile);
 }

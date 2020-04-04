@@ -14,6 +14,20 @@
 //=================================
 // Function prototypes
 //void printmat(char **A, int m, int n);
+
+void freetable(char **A){
+	free(A[0]);
+	free(A);
+}
+
+void printvec(int *v, int n){
+	printf("| ");
+	for (size_t i = 0; i < n; ++i) {
+		printf("%d ", v[i]);
+	}
+	printf("|\n");
+}
+
 void printmat(char **A, int m, int n){
 	for (size_t i = 0; i < m; ++i) {
 		printf("| ");

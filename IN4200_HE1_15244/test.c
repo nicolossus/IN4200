@@ -19,11 +19,15 @@ int test_read_graph1();
 //============================================================================
 int main(int argc, char *argv[])
 //----------------------------------------------------------------------------
-// Test implemented functions. Specify filename of
+// Test implemented functions.
+//
+// Parameters given on command line
+// --------------------------------
+// program.c: filename of program with function to be tested
 //----------------------------------------------------------------------------
 {
 	if (argc < 2) {
-		printf("Filename required. Provide 'all' to test all, else specify which file.\n");
+		printf("Program filename required. Provide 'all' to test all, else specify which file.\n");
 		exit(0);
 	}
 
@@ -41,7 +45,7 @@ int main(int argc, char *argv[])
 		total_tests = 3; //????
 	}
 	else if (strcmp(argv[1], "all") == 0) {
-		test_read_graph1();
+		passed_tests = test_read_graph1();
 		total_tests = 3;
 	}
 	else
@@ -68,9 +72,10 @@ int test_read_graph1()
 	printf("\n------------------------------\n");
 	printf("Test 'read_graph_from_file1.c'\n");
 	printf("------------------------------\n");
-	printf("Graph file: 'test_graph.txt' located in data folder\n");
+	printf("Web graph file: '8-webpages.txt' located in data folder\n");
 
 	int passed_tests = 0;
+	clock_t t;
 
 	char table2D_expected[8][8] = {
 		{0, 0, 0, 0, 0, 0, 1, 0},
@@ -87,8 +92,11 @@ int test_read_graph1()
 	int N;
 	int nedges=0;
 
-
-	read_graph_from_file1("data/test_graph.txt", &N, &table2D);
+	t = clock();
+	read_graph_from_file1("data/8-webpages.txt", &N, &table2D);
+	t = clock() - t;
+	double t_tot = ((double)t)/CLOCKS_PER_SEC;
+	printf("\nTime usage:\nread_graph_from_file1() took %f milliseconds to execute \n\n", 1000*t_tot);
 
 	for (size_t i = 0; i < N; ++i) {
 		for (size_t j = 0; j < N; ++j) {
@@ -135,6 +143,7 @@ int test_read_graph1()
 	}
 	printf("Read table:\n");
 	printmat(table2D, N, N);
+	freetable(table2D);
 
 	return passed_tests;
 }
