@@ -7,11 +7,13 @@
 #include <time.h>
 #include <omp.h>
 #include "src/read_graph_from_file1.h"
+#include "src/read_graph_from_file2.h"
 #include "src/helperfunc.h"
 
 //=================================
 // Function prototypes
 int test_read_graph1();
+int test_read_graph2();
 
 
 //============================================================================
@@ -41,12 +43,13 @@ int main(int argc, char *argv[])
 	}
 	else if (strcmp(argv[1], "read_graph_from_file2.c") == 0)
 	{
-		//execute your code
-		total_tests = 3; //????
+		passed_tests = test_read_graph2();
+		total_tests = 4;
 	}
 	else if (strcmp(argv[1], "all") == 0) {
 		passed_tests = test_read_graph1();
-		total_tests = 3;
+		passed_tests += test_read_graph2();
+		total_tests = 7;
 	}
 	else
 	{
@@ -114,7 +117,6 @@ int test_read_graph1()
 	else
 	{
 		printf("Failed test 'Read number of nodes'. Expected: 8. Found: %d\n", N);
-		passed_tests += 1;
 	}
 
 	// Test: Read number of edges
@@ -128,22 +130,111 @@ int test_read_graph1()
 	}
 
 	// Test: Compare read table2D vs expected
-	int counter = 0;
+	int flag = 0;
 	for (size_t i = 0; i < 8; ++i) {
 		for (size_t j = 0; j < 8; ++j) {
 			if (table2D_expected[i][j] != table2D[i][j]) {
 				printf("Failed test 'Compare table2D'. Entries don't match expectation.\n");
-				counter = 1;
+				flag = 1;
 			}
 		}
 	}
-	if (counter == 0) {
+	if (flag == 0) {
 		printf("Passed test 'Compare table2D'. Entries matched expectation.\n");
 		passed_tests += 1;
 	}
 	printf("Read table:\n");
 	printmat(table2D, N, N);
 	freetable(table2D);
+
+	return passed_tests;
+}
+//=============================================================================
+
+
+//=============================================================================
+int test_read_graph2()
+//----------------------------------------------------------------------------
+// Test function for 'read_graph_from_file1.c'
+//----------------------------------------------------------------------------
+{
+	printf("\n------------------------------\n");
+	printf("Test 'read_graph_from_file2.c'\n");
+	printf("------------------------------\n");
+	printf("Web graph file: '8-webpages.txt' located in data folder\n");
+
+	int passed_tests = 0;
+	clock_t t;
+
+	int col_idx_expected[17] = {6, 0, 2, 3, 0, 1, 2, 3, 6, 3, 4, 7, 4, 7, 4, 5, 6};
+	int row_ptr_expected[9] = {0, 1, 4, 5, 6, 9, 12, 14, 17};
+
+	int *row_ptr;
+	int *col_idx;
+	int N, N_links;
+
+	t = clock();
+	read_graph_from_file2("data/8-webpages.txt", &N, &N_links, &row_ptr, &col_idx);
+	t = clock() - t;
+	double t_tot = ((double)t)/CLOCKS_PER_SEC;
+	printf("\nTime usage:\nread_graph_from_file2() took %f milliseconds to execute \n\n", 1000*t_tot);
+
+
+	// Test: Read number of nodes
+	if (N == 8) {
+		printf("Passed test 'Read number of nodes'. Expected: 8. Found: %d\n", N);
+		passed_tests += 1;
+	}
+	else
+	{
+		printf("Failed test 'Read number of nodes'. Expected: 8. Found: %d\n", N);
+	}
+
+	// Test: Read number of edges
+	if (N_links == 17) {
+		printf("Passed test 'Read number of edges'. Expected: 17. Found: %d\n", N_links);
+		passed_tests += 1;
+	}
+	else
+	{
+		printf("Failed test 'Read number of edges'. Expected: 17. Found: %d\n", N_links);
+	}
+
+	// Test: Compare read row_ptr vs expected
+	int flag = 0;
+	for (size_t i=0; i<N+1; i++) {
+		if (row_ptr_expected[i] != row_ptr[i])
+		{
+			printf("Failed test 'Compare row_ptr'. Entries don't match expectation.\n");
+			flag = 1;
+		}
+	}
+	if (flag == 0) {
+		printf("Passed test 'Compare row_ptr'. Entries matched expectation.\n");
+		passed_tests += 1;
+	}
+
+	printf("Read row_ptr:\n");
+	printvec(row_ptr, N+1);
+
+	// Test: Compare read col_idx vs expected
+	int flag2 = 0;
+	for (size_t i=0; i<N_links; i++) {
+		if (col_idx_expected[i] != col_idx[i])
+		{
+			printf("Failed test 'Compare row_ptr'. Entries don't match expectation.\n");
+			flag2 = 1;
+		}
+	}
+	if (flag2 == 0) {
+		printf("Passed test 'Compare row_ptr'. Entries matched expectation.\n");
+		passed_tests += 1;
+	}
+	printf("Read col_idx:\n");
+	printvec(col_idx, N_links);
+
+	free(row_ptr);
+	free(col_idx);
 
 	return passed_tests;
 }

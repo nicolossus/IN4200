@@ -34,60 +34,14 @@ void read_graph_from_file2(char *filename, int *N, int *N_links, int **row_ptr, 
 		(*row_ptr)[i] += (*row_ptr)[i-1];
 	}
 
-	int pos = 0;
-	for (size_t i=0; i<*N; i++) {
-		for (size_t j=0; j<*N_links; j++) {
-			if (ToNode[j] == i) {
-				(*col_idx)[pos] = FromNode[j];
-				pos++;
-			}
-		}
+	int *counter = calloc((*N), sizeof(*counter));
+	for (size_t i=0; i<*N_links; i++) {
+		(*col_idx)[(*row_ptr)[ToNode[i]] + counter[ToNode[i]]] = FromNode[i];
+		counter[ToNode[i]]++;
 	}
 
 	free(ToNode);
 	free(FromNode);
+	free(counter);
 
-}
-
-
-//==================================================
-void swap(int *a, int *b)
-{
-	int t=*a; *a=*b; *b=t;
-}
-//==================================================
-
-
-//==================================================
-void sort(int arr[], int beg, int end)
-{
-	if (end > beg + 1) {
-		int piv = arr[beg], l = beg + 1, r = end;
-		while (l < r) {
-			if (arr[l] <= piv)
-				l++;
-			else
-				swap(&arr[l], &arr[--r]);
-		}
-		swap(&arr[--l], &arr[beg]);
-		sort(arr, beg, l);
-		sort(arr, r, end);
-	}
-}
-//==================================================
-
-void perm_sort(int arr[], int perm[], int beg, int end)
-{
-	if (end > beg + 1) {
-		int piv = arr[perm[beg]], l = beg + 1, r = end;
-		while (l < r) {
-			if (arr[perm[l]] <= piv)
-				l++;
-			else
-				swap(&perm[l], &perm[--r]);
-		}
-		swap(&perm[--l], &perm[beg]);
-		perm_sort(arr, perm, beg, l);
-		perm_sort(arr, perm, r, end);
-	}
 }

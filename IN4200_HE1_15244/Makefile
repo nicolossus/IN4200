@@ -9,11 +9,11 @@ ifeq ($(UNAME), Linux)
 CC := gcc
 endif
 
-CFLAGS = -Wall -std=c11
+CFLAGS := -Wall -std=c11
 PROFILE := -pg
 
-DEP = src/helperfunc.h src/read_graph_from_file1.h src/read_graph_from_file2.h
-OBJ = src/read_graph_from_file1.c src/read_graph_from_file2.c
+DEP = src/helperfunc.h src/read_graph_from_file1.h src/read_graph_from_file2.h src/count_mutual_links1.h
+OBJ = src/read_graph_from_file1.c src/read_graph_from_file2.c src/count_mutual_links1.c
 
 .PHONY : all clean
 

@@ -33,16 +33,19 @@ int main(int argc, char *argv[])
 	int *col_idx;
 	int N, N_links;
 
-	read_graph_from_file1(argv[1], &N, &table2D);
+	/*
+	   read_graph_from_file1(argv[1], &N, &table2D);
+	   printmat(table2D, N, N);
+	   freetable(table2D);
+	 */
 
 	read_graph_from_file2(argv[1], &N, &N_links, &row_ptr, &col_idx);
+	//printvec(row_ptr, N+1);
+	//printvec(col_idx, N_links);
 
-	printvec(row_ptr, N+1);
-	printvec(col_idx, N_links);
-
-	freetable(table2D);
 	free(row_ptr);
 	free(col_idx);
+
 
 	return 0;
 }
