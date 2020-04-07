@@ -1,7 +1,11 @@
 #include "read_graph_from_file1.h"
 
-void read_graph_from_file1 (char *filename, int *N, char ***table2D){
-
+//=============================================================================
+void read_graph_from_file1 (char *filename, int *N, char ***table2D)
+//----------------------------------------------------------------------------
+//
+//----------------------------------------------------------------------------
+{
 	FILE *datafile;
 	int nedges, i, j;
 
@@ -33,3 +37,4 @@ void read_graph_from_file1 (char *filename, int *N, char ***table2D){
 
 	fclose(datafile);
 }
+//=============================================================================

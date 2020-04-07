@@ -1,7 +1,7 @@
 //=================================
 // Include guard
-#ifndef COUNT_MUTUAL_LINKS1_H
-#define COUNT_MUTUAL_LINKS1_H
+#ifndef COUNT_MUTUAL_LINKS2_H
+#define COUNT_MUTUAL_LINKS2_H
 
 //=================================
 // Include dependencies
@@ -14,6 +14,6 @@
 
 //=================================
 // Function prototypes
-int count_mutual_links1(int N, char **table2D, int *num_involvements);
+int count_mutual_links2(int N, int N_links, int *row_ptr, int *col_idx, int *num_involvements);
 
-#endif // __COUNT_MUTUAL_LINKS1_H_INCLUDED__
+#endif // __COUNT_MUTUAL_LINKS2_H_INCLUDED__

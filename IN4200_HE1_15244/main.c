@@ -7,6 +7,9 @@
 #include <omp.h>
 #include "src/read_graph_from_file1.h"
 #include "src/read_graph_from_file2.h"
+#include "src/count_mutual_links1.h"
+#include "src/count_mutual_links2.h"
+#include "src/top_n_webpages.h"
 #include "src/helperfunc.h"
 
 //============================================================================
@@ -18,34 +21,60 @@ int main(int argc, char *argv[])
 //
 // Parameters given on command line
 // --------------------------------
-// webgraph.txt: filename of web graph to be used in benchmark
-// Nrep: number of function call repetitions. The average runtime is calculated
+// webgraph.txt: filename of web graph to be used in benchmark as str
+// Method: 1 or 2 as int
+// n: the number of webpages to rank
 //----------------------------------------------------------------------------
 {
 
-	if (argc < 2) {
-		printf("Web graph filename required.\n");
+	if (argc < 4) {
+		printf("Web graph filename, method (1 or 2) and how many n webpages to rank is required.\n");
 		exit(0);
 	}
 
-	char **table2D;
-	int *row_ptr;
-	int *col_idx;
-	int N, N_links;
+	int flag = atoi(argv[2]);
+	int n = atoi(argv[3]);
 
-	/*
-	   read_graph_from_file1(argv[1], &N, &table2D);
-	   printmat(table2D, N, N);
-	   freetable(table2D);
-	 */
+	if (flag == 1) {
+		// Method 1 with 2D table
+		char **table2D;
+		int N, mutual_links;
 
-	read_graph_from_file2(argv[1], &N, &N_links, &row_ptr, &col_idx);
-	//printvec(row_ptr, N+1);
-	//printvec(col_idx, N_links);
+		read_graph_from_file1(argv[1], &N, &table2D);
+		int *num_involvements = calloc((N), sizeof(*num_involvements));
+		mutual_links = count_mutual_links1(N, table2D, num_involvements);
+		printf("Total number of mutual links: %d\n", mutual_links);
+		printf("Webpage number of involvements:\n");
+		printvec(num_involvements, N);
+		top_n_webpages(N, num_involvements, n);
+		printf("\nMain() done!\n\n");
 
-	free(row_ptr);
-	free(col_idx);
+		freetable(table2D);
+		free(num_involvements);
+	}
+	else if (flag==2) {
+		// Method 2 with CRS
+		int *row_ptr;
+		int *col_idx;
+		int N, N_links, mutual_links;
 
+		read_graph_from_file2(argv[1], &N, &N_links, &row_ptr, &col_idx);
+		int *num_involvements = calloc((N), sizeof(*num_involvements));
+		mutual_links = count_mutual_links2(N, N_links, row_ptr, col_idx, num_involvements);
+		printf("Total number of mutual links: %d\n", mutual_links);
+		printf("Webpage number of involvements:\n");
+		printvec(num_involvements, N);
+		top_n_webpages(N, num_involvements, n);
+		printf("\nMain() done!\n\n");
+
+		free(row_ptr);
+		free(col_idx);
+		free(num_involvements);
+	}
+	else{
+		printf("Please supply which method by 1 or 2 as int on command line");
+		exit(0);
+	}
 
 	return 0;
 }

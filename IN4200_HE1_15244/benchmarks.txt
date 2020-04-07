@@ -1,0 +1,73 @@
+-----------------------------------
+Benchmark 'read_graph_from_file1.c'
+-----------------------------------
+Web graph file: 'data/8-webpages.txt'
+
+Time usage averaged over 50 repetitions:
+read_graph_from_file1()  took 0.027960 milliseconds to execute   with 03
+read_graph_from_file1()  took 0.015380 milliseconds to execute   without
+
+
+-----------------------------------
+Benchmark 'read_graph_from_file1.c'
+-----------------------------------
+Web graph file: 'data/100nodes_graph.txt'
+
+Time usage averaged over 50 repetitions:
+read_graph_from_file1()  took 0.110940 milliseconds to execute
+read_graph_from_file1()  took 0.081700 milliseconds to execute     without
+
+
+-----------------------------------
+Benchmark 'read_graph_from_file2.c'
+-----------------------------------
+Web graph file: 'data/8-webpages.txt'
+
+Time usage averaged over 50 repetitions:
+read_graph_from_file2()  took 0.028160 milliseconds to execute
+read_graph_from_file2()  took 0.014600 milliseconds to execute    without
+
+
+-----------------------------------
+Benchmark 'read_graph_from_file2.c'
+-----------------------------------
+Web graph file: 'data/100nodes_graph.txt'
+
+Time usage averaged over 50 repetitions:
+read_graph_from_file2()  took 0.098500 milliseconds to execute
+read_graph_from_file2()  took 0.126300 milliseconds to execute    without
+
+
+-----------------------------------
+Benchmark 'read_graph_from_file2.c'
+-----------------------------------
+Web graph file: 'data/web-NotreDame.txt'
+
+Time usage averaged over 10 repetitions:
+read_graph_from_file2()  took 304.907600 milliseconds to execute
+read_graph_from_file2()  took 314.332100 milliseconds to execute   without
+
+
+-----------------------------------
+Benchmark 'count_mutual_links1.c'
+-----------------------------------
+Web graph file: 'data/8-webpages.txt'
+
+Time usage averaged over 100 repetitions:
+read_graph_from_file1()  took 0.000990 milliseconds to execute
+read_graph_from_file1()  took 0.000620 milliseconds to execute   without
+
+
+-----------------------------------
+Benchmark 'count_mutual_links1.c'
+-----------------------------------
+Web graph file: 'data/100nodes_graph.txt'
+
+Time usage averaged over 100 repetitions:
+read_graph_from_file1()  took 0.000620 milliseconds to execute
+read_graph_from_file1()  took 0.000750 milliseconds to execute    without
+
+##########################
+
+read_graph_from_file1()  took 0.027960 milliseconds to execute   with 03
+read_graph_from_file1()  took 0.015380 milliseconds to execute   without

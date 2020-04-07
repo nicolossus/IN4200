@@ -1,7 +1,11 @@
 #include "read_graph_from_file2.h"
 
-void read_graph_from_file2(char *filename, int *N, int *N_links, int **row_ptr, int **col_idx){
-
+//=============================================================================
+void read_graph_from_file2(char *filename, int *N, int *N_links, int **row_ptr, int **col_idx)
+//----------------------------------------------------------------------------
+//
+//----------------------------------------------------------------------------
+{
 	FILE *datafile;
 	int i, j;
 
@@ -45,3 +49,4 @@ void read_graph_from_file2(char *filename, int *N, int *N_links, int **row_ptr, 
 	free(counter);
 
 }
+//=============================================================================
