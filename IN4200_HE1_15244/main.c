@@ -44,8 +44,6 @@ int main(int argc, char *argv[])
 		int *num_involvements = calloc((N), sizeof(*num_involvements));
 		mutual_links = count_mutual_links1(N, table2D, num_involvements);
 		printf("Total number of mutual links: %d\n", mutual_links);
-		printf("Webpage number of involvements:\n");
-		printvec(num_involvements, N);
 		top_n_webpages(N, num_involvements, n);
 		printf("\nMain() done!\n\n");
 
@@ -62,8 +60,6 @@ int main(int argc, char *argv[])
 		int *num_involvements = calloc((N), sizeof(*num_involvements));
 		mutual_links = count_mutual_links2(N, N_links, row_ptr, col_idx, num_involvements);
 		printf("Total number of mutual links: %d\n", mutual_links);
-		printf("Webpage number of involvements:\n");
-		printvec(num_involvements, N);
 		top_n_webpages(N, num_involvements, n);
 		printf("\nMain() done!\n\n");
 
