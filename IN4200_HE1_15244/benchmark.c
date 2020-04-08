@@ -191,6 +191,46 @@ void benchmark_count_mutual_links1(char *graphfile, int Nrep)
 }
 //=============================================================================
 
+/*
+   //=============================================================================
+   void benchmark_count_mutual_links2(char *graphfile, int Nrep)
+   //----------------------------------------------------------------------------
+   // Test function for 'read_graph_from_file1.c'
+   //----------------------------------------------------------------------------
+   {
+        printf("\n-----------------------------------\n");
+        printf("Benchmark 'count_mutual_links2.c'\n");
+        printf("-----------------------------------\n");
+        printf("Web graph file: '%s'\n", graphfile);
+
+        clock_t t;
+
+        int *row_ptr;
+        int *col_idx;
+        int N, N_links, mutual_links;
+
+        read_graph_from_file2(graphfile, &N, &N_links, &row_ptr, &col_idx);
+        int *num_involvements = calloc((N), sizeof(*num_involvements));
+        t = clock();
+        mutual_links = count_mutual_links2(N, N_links, row_ptr, col_idx, num_involvements);
+
+        t = clock();
+        for (int i=0; i<Nrep; i++) {
+                mutual_links = count_mutual_links2(N, N_links, row_ptr, col_idx, num_involvements);
+        }
+        t = clock() - t;
+        double t_tot = ((double)t)/CLOCKS_PER_SEC/Nrep;
+        printf("\nTime usage averaged over %d repetitions:\ncount_mutual_links2()\
+   took %f milliseconds to execute \n\n", Nrep, 1000*t_tot);
+
+        free(row_ptr);
+        free(col_idx);
+        free(num_involvements);
+
+   }
+   //=============================================================================
+ */
+
 
 //=============================================================================
 void benchmark_count_mutual_links2(char *graphfile, int Nrep)
@@ -203,25 +243,37 @@ void benchmark_count_mutual_links2(char *graphfile, int Nrep)
 	printf("-----------------------------------\n");
 	printf("Web graph file: '%s'\n", graphfile);
 
-	clock_t t;
-
 	int *row_ptr;
 	int *col_idx;
 	int N, N_links, mutual_links;
 
 	read_graph_from_file2(graphfile, &N, &N_links, &row_ptr, &col_idx);
 	int *num_involvements = calloc((N), sizeof(*num_involvements));
-	t = clock();
-	mutual_links = count_mutual_links2(N, N_links, row_ptr, col_idx, num_involvements);
 
-	t = clock();
-	for (int i=0; i<Nrep; i++) {
-		mutual_links = count_mutual_links2(N, N_links, row_ptr, col_idx, num_involvements);
+	#if defined(_OPENMP)
+	{
+		double start = omp_get_wtime();
+		for (int i=0; i<Nrep; i++) {
+			mutual_links = count_mutual_links2(N, N_links, row_ptr, col_idx, num_involvements);
+		}
+		double end = omp_get_wtime();
+		double t_tot = end - start;
+		printf("\nTime usage averaged over %d repetitions:\ncount_mutual_links2()\
+	  took %f milliseconds to execute \n\n", Nrep, 1000*t_tot/Nrep);
 	}
-	t = clock() - t;
-	double t_tot = ((double)t)/CLOCKS_PER_SEC/Nrep;
-	printf("\nTime usage averaged over %d repetitions:\ncount_mutual_links2()\
-  took %f milliseconds to execute \n\n", Nrep, 1000*t_tot);
+ #else
+	{
+		clock_t t;
+		t = clock();
+		for (int i=0; i<Nrep; i++) {
+			mutual_links = count_mutual_links2(N, N_links, row_ptr, col_idx, num_involvements);
+		}
+		t = clock() - t;
+		double t_tot = ((double)t)/CLOCKS_PER_SEC/Nrep;
+		printf("\nTime usage averaged over %d repetitions:\ncount_mutual_links2()\
+	  took %f milliseconds to execute \n\n", Nrep, 1000*t_tot);
+	}
+ #endif
 
 	free(row_ptr);
 	free(col_idx);

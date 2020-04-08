@@ -45,7 +45,6 @@ int main(int argc, char *argv[])
 		mutual_links = count_mutual_links1(N, table2D, num_involvements);
 		printf("Total number of mutual links: %d\n", mutual_links);
 		top_n_webpages(N, num_involvements, n);
-		printf("\nMain() done!\n\n");
 
 		freetable(table2D);
 		free(num_involvements);
@@ -61,7 +60,6 @@ int main(int argc, char *argv[])
 		mutual_links = count_mutual_links2(N, N_links, row_ptr, col_idx, num_involvements);
 		printf("Total number of mutual links: %d\n", mutual_links);
 		top_n_webpages(N, num_involvements, n);
-		printf("\nMain() done!\n\n");
 
 		free(row_ptr);
 		free(col_idx);
