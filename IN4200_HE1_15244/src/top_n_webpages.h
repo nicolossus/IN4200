@@ -18,6 +18,6 @@
 // Function prototypes
 void top_n_webpages(int num_webpages, int *num_involvements, int n);
 void calc_top_n_webpages(int num_webpages, int *num_involvements, int *top_results, int n);
-void top_n_webpages_faster(int num_webpages, int *num_involvements, int n);
+void top_n_webpages_serial_faster(int num_webpages, int *num_involvements, int n);
 
 #endif // __TOP_N_WEBPAGES_H_INCLUDED__

@@ -15,8 +15,8 @@
 
 //=================================
 // Function prototypes
-int test_read_graph1();
-int test_read_graph2();
+int test_read_graph_from_file1();
+int test_read_graph_from_file2();
 int test_count_mutual_links1();
 int test_count_mutual_links2();
 int test_calc_top_n_webpages();
@@ -44,12 +44,12 @@ int main(int argc, char *argv[])
 
 	if (strcmp(argv[1], "read_graph_from_file1.c") == 0)
 	{
-		passed_tests = test_read_graph1();
+		passed_tests = test_read_graph_from_file1();
 		total_tests = 3;
 	}
 	else if (strcmp(argv[1], "read_graph_from_file2.c") == 0)
 	{
-		passed_tests = test_read_graph2();
+		passed_tests = test_read_graph_from_file2();
 		total_tests = 4;
 	}
 	else if (strcmp(argv[1], "count_mutual_links1.c") == 0)
@@ -68,8 +68,8 @@ int main(int argc, char *argv[])
 		total_tests = 1;
 	}
 	else if (strcmp(argv[1], "all") == 0) {
-		passed_tests = test_read_graph1();
-		passed_tests += test_read_graph2();
+		passed_tests = test_read_graph_from_file1();
+		passed_tests += test_read_graph_from_file2();
 		passed_tests += test_count_mutual_links1();
 		passed_tests += test_count_mutual_links2();
 		passed_tests += test_calc_top_n_webpages();
@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
 
 
 //=============================================================================
-int test_read_graph1()
+int test_read_graph_from_file1()
 //----------------------------------------------------------------------------
 // Test function for 'read_graph_from_file1.c'
 //----------------------------------------------------------------------------
@@ -177,7 +177,7 @@ int test_read_graph1()
 
 
 //=============================================================================
-int test_read_graph2()
+int test_read_graph_from_file2()
 //----------------------------------------------------------------------------
 // Test function for 'read_graph_from_file1.c'
 //----------------------------------------------------------------------------

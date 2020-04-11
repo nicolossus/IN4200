@@ -8,3 +8,8 @@ This is not ideal as this adds another for-loop to the algorithm. However, the l
 over n, thus not adding much complexity in normal use cases, and it might be seen
 as an advantage to be able to store the top ranked nodes in an array. So all in all,
 this approached may be justified. The calc_top f
+
+
+
+
+make sure that there is enough work so you don't encounter overhead
