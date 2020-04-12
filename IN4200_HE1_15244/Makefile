@@ -10,7 +10,7 @@ CC := gcc
 endif
 
 #CFLAGS := -Wall -std=c11 -O3
-CFLAGS := -O3
+CFLAGS := -O3 -std=c11
 PROFILE := -pg
 
 DEP = $(wildcard src/*.h)

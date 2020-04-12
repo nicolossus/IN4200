@@ -40,8 +40,7 @@ int main(int argc, char *argv[])
 {
 	if (argc < 4) {
 		printf("Please provide program filename, web graph filename and number of \
-    repetitions on command line. program.c webgraph.txt Nrep required. Provide \
-    'all' to test all, else specify which file.\n");
+    repetitions on command line. program.c webgraph.txt Nrep required.\n");
 		exit(0);
 	}
 
@@ -71,28 +70,12 @@ int main(int argc, char *argv[])
 	{
 		benchmark_calc_top_n_webpages_serial(argv[2], Nrep);
 	}
-	else if (strcmp(argv[1], "method1") == 0)
-	{
-		benchmark_method1(argv[2], Nrep);
-	}
-	else if (strcmp(argv[1], "method2") == 0)
-	{
-		benchmark_method2(argv[2], Nrep);
-	}
-	else if (strcmp(argv[1], "all") == 0) {
-		benchmark_read_graph_from_file1(argv[2], Nrep);
-		benchmark_read_graph_from_file2(argv[2], Nrep);
-		benchmark_count_mutual_links1(argv[2], Nrep);
-		benchmark_count_mutual_links2(argv[2], Nrep);
-		benchmark_calc_top_n_webpages(argv[2], Nrep);
-		benchmark_method1(argv[2], Nrep);
-		benchmark_method2(argv[2], Nrep);
-	}
 	else
 	{
 		printf("Provided filename not valid. Provide one of the following:\n" );
-		printf("'read_graph_from_file1.c'\n'read_graph_from_file2.c'\n 'count_mutual_links1.c'\n");
-		printf("'all' to test all\n");
+		printf("'read_graph_from_file1.c'\n'read_graph_from_file2.c'\n\
+		'count_mutual_links1.c'\n'count_mutual_links2.c'\n'top_n_webpages.c'\n\
+		'top_n_webpages_serial.c'\n");
 		exit(0);
 	}
 
@@ -104,7 +87,12 @@ int main(int argc, char *argv[])
 //=============================================================================
 void benchmark_read_graph_from_file1(char *graphfile, int Nrep)
 //----------------------------------------------------------------------------
-// Test function for 'read_graph_from_file1.c'
+// Benchmark function for 'read_graph_from_file1.c'.
+//
+// Arguments
+// ---------
+// *graphfile: filename of web graph as str
+// Nrep: number of function call repetitions as int.
 //----------------------------------------------------------------------------
 {
 	printf("\n-----------------------------------\n");
@@ -140,7 +128,12 @@ void benchmark_read_graph_from_file1(char *graphfile, int Nrep)
 //=============================================================================
 void benchmark_read_graph_from_file2(char *graphfile, int Nrep)
 //----------------------------------------------------------------------------
-// Test function for 'read_graph_from_file1.c'
+// Benchmark function for 'read_graph_from_file2.c'.
+//
+// Arguments
+// ---------
+// *graphfile: filename of web graph as str
+// Nrep: number of function call repetitions as int.
 //----------------------------------------------------------------------------
 {
 	printf("\n-----------------------------------\n");
@@ -179,6 +172,11 @@ void benchmark_read_graph_from_file2(char *graphfile, int Nrep)
 void benchmark_count_mutual_links1(char *graphfile, int Nrep)
 //----------------------------------------------------------------------------
 // Benchmark function for 'count_mutual_links1.c'
+//
+// Arguments
+// ---------
+// *graphfile: filename of web graph as str
+// Nrep: number of function call repetitions as int.
 //----------------------------------------------------------------------------
 {
 	printf("\n-----------------------------------\n");
@@ -217,6 +215,11 @@ void benchmark_count_mutual_links1(char *graphfile, int Nrep)
 void benchmark_count_mutual_links2(char *graphfile, int Nrep)
 //----------------------------------------------------------------------------
 // Benchmark function for 'count_mutual_links2.c'
+//
+// Arguments
+// ---------
+// *graphfile: filename of web graph as str
+// Nrep: number of function call repetitions as int.
 //----------------------------------------------------------------------------
 {
 	printf("\n-----------------------------------\n");
@@ -259,6 +262,7 @@ void benchmark_count_mutual_links2(char *graphfile, int Nrep)
 void benchmark_calc_top_n_webpages(char *graphfile, int Nrep)
 //----------------------------------------------------------------------------
 // Benchmark function for 'top_n_webpages.c'
+//
 // This only benchmarks the implementation of calc_top_n_webpages(), which
 // searches the num_involvements array for the indices corresponding to the n
 // top webpage nodes and stores them in top_results.
@@ -270,6 +274,11 @@ void benchmark_calc_top_n_webpages(char *graphfile, int Nrep)
 // To accomendate for this the function top_n_webpages_faster() has also been
 // implemented, which calculates and prints with complexity N*n rather than
 // N*n+n in top_n_webpages()
+//
+// Arguments
+// ---------
+// *graphfile: filename of web graph as str
+// Nrep: number of function call repetitions as int.
 //----------------------------------------------------------------------------
 {
 	printf("\n-----------------------------------\n");
@@ -316,7 +325,8 @@ void benchmark_calc_top_n_webpages(char *graphfile, int Nrep)
 //=============================================================================
 void benchmark_calc_top_n_webpages_serial(char *graphfile, int Nrep)
 //----------------------------------------------------------------------------
-// Benchmark function for 'top_n_webpages.c'
+// Benchmark function for the serial version of 'top_n_webpages.c'
+//
 // This only benchmarks the implementation of calc_top_n_webpages(), which
 // searches the num_involvements array for the indices corresponding to the n
 // top webpage nodes and stores them in top_results.
@@ -328,6 +338,11 @@ void benchmark_calc_top_n_webpages_serial(char *graphfile, int Nrep)
 // To accomendate for this the function top_n_webpages_faster() has also been
 // implemented, which calculates and prints with complexity N*n rather than
 // N*n+n in top_n_webpages()
+//
+// Arguments
+// ---------
+// *graphfile: filename of web graph as str
+// Nrep: number of function call repetitions as int.
 //----------------------------------------------------------------------------
 {
 	printf("\n-----------------------------------\n");
@@ -377,100 +392,6 @@ void benchmark_calc_top_n_webpages_serial(char *graphfile, int Nrep)
 	free(col_idx);
 	free(num_involvements);
 	free(top_results);
-
-}
-//=============================================================================
-
-
-//=============================================================================
-void benchmark_method1(char *graphfile, int Nrep)
-//----------------------------------------------------------------------------
-// Benchmark method 1 with 2D table as storage format with all allocations,
-// function calls and deallocations
-//----------------------------------------------------------------------------
-{
-	printf("\n------------------------------------------------------------------------\n");
-	printf("Benchmark method 1 with 2D table as storage format with all allocations,\n\
-function calls and deallocations.\n");
-	printf("------------------------------------------------------------------------\n");
-	printf("Web graph file: '%s'\n", graphfile);
-
-	double t = omp_get_wtime();
-
-	for (int i=0; i<Nrep; i++) {
-		char **table2D;
-		int N, mutual_links;
-		int n = 10;
-		read_graph_from_file1(graphfile, &N, &table2D);
-		int *num_involvements = calloc((N), sizeof(*num_involvements));
-		mutual_links = count_mutual_links1(N, table2D, num_involvements);
-		int *top_results = malloc(n * sizeof(*top_results));
-		calc_top_n_webpages(N, num_involvements, top_results, n);
-
-		freetable(table2D);
-		free(top_results);
-		free(num_involvements);
-	}
-	t = omp_get_wtime() - t;
-	double t_tot = ((double)t)/Nrep;
-	printf("\nTime usage averaged over %d repetitions:\nMethod 1\
-  took %f milliseconds to execute \n\n", Nrep, 1000*t_tot);
-
-	FILE *outfile;
-	outfile=fopen("time.txt", "w");
-	if(outfile == NULL)
-		exit(0);
-	fprintf(outfile, "%f", 1000*t_tot);
-	fclose(outfile);
-
-}
-//=============================================================================
-
-
-//=============================================================================
-void benchmark_method2(char *graphfile, int Nrep)
-//----------------------------------------------------------------------------
-// Benchmark method 1 with 2D table as storage format with all allocations,
-// function calls and deallocations
-//----------------------------------------------------------------------------
-{
-	printf("\n------------------------------------------------------------------------\n");
-	printf("Benchmark method 2 with CRS as storage format with all allocations,\n\
-function calls and deallocations. Top 10 webpages is ranked.\n");
-	printf("------------------------------------------------------------------------\n");
-	printf("Web graph file: '%s'\n", graphfile);
-
-	double t = omp_get_wtime();
-
-	for (int i=0; i<Nrep; i++) {
-
-		int *row_ptr;
-		int *col_idx;
-		int N, N_links, mutual_links;
-		int n = 10;
-
-		read_graph_from_file2(graphfile, &N, &N_links, &row_ptr, &col_idx);
-		int *num_involvements = calloc((N), sizeof(*num_involvements));
-		mutual_links = count_mutual_links2(N, N_links, row_ptr, col_idx, num_involvements);
-		int *top_results = malloc(n * sizeof(*top_results));
-		calc_top_n_webpages(N, num_involvements, top_results, n);
-
-		free(row_ptr);
-		free(col_idx);
-		free(top_results);
-		free(num_involvements);
-	}
-	t = omp_get_wtime() - t;
-	double t_tot = ((double)t)/Nrep;
-	printf("\nTime usage averaged over %d repetitions:\nMethod 2\
-  took %f milliseconds to execute \n\n", Nrep, 1000*t_tot);
-
-	FILE *outfile;
-	outfile=fopen("time.txt", "w");
-	if(outfile == NULL)
-		exit(0);
-	fprintf(outfile, "%f", 1000*t_tot);
-	fclose(outfile);
 
 }
 //=============================================================================

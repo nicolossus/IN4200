@@ -1,3 +1,17 @@
+# IN4200: Home Exam 1, Spring 2020
+
+*Counting Mutual Web Linkage Occurences*
+
+**Candidate: 15244**
+
+**Disclaimer**
+This project was embarked on in collaboration with candidate 15224. Hence, our individual  have a strong resemblance in both presentation and content. In particular, figures and tables with corresponding captions are nearly, or in some cases entirely, identical.
+
+### Contents
+
+
+
+
 MAIN PROGRAM
 main.c contains procedures for reading a web graph and ranking the top n webpages.
 The storage of the web graph data is done by one of two methods:

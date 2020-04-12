@@ -17,13 +17,16 @@
 //============================================================================
 int main(int argc, char *argv[])
 //----------------------------------------------------------------------------
-// Counting mutual web linkage occurrences
+// Count mutual web linkage occurrences and rank top n webpages of web graphs.
+// Two methods for storing the web graph is deployed:
+// 			1. 2D table as storage format
+//      2. Compressed row storage (CRS) as storage format
 //
-// Parameters given on command line
+// Arguments given on command line
 // --------------------------------
-// webgraph.txt: filename of web graph to be used in benchmark as str
+// webgraph.txt: filename of web graph as str
 // Method: 1 or 2 as int
-// n: the number of webpages to rank
+// n: the number of webpages to rank as int
 //----------------------------------------------------------------------------
 {
 
@@ -36,7 +39,7 @@ int main(int argc, char *argv[])
 	int n = atoi(argv[3]);
 
 	if (flag == 1) {
-		// Method 1 with 2D table
+		// Method 1 with 2D table as storage format
 		printf("\nMethod 1 with 2D table as storage format\nWeb graph: '%s'\n", argv[1]);
 
 		char **table2D;
@@ -46,7 +49,6 @@ int main(int argc, char *argv[])
 		int *num_involvements = calloc((N), sizeof(*num_involvements));
 		mutual_links = count_mutual_links1(N, table2D, num_involvements);
 		printf("Total number of mutual links: %d\n", mutual_links);
-		printf("Top %d webpages:\n", n);
 		//top_n_webpages(N, num_involvements, n);
 		top_n_webpages_serial_faster(N, num_involvements, n); // this is the fastest
 
@@ -54,7 +56,7 @@ int main(int argc, char *argv[])
 		free(num_involvements);
 	}
 	else if (flag==2) {
-		// Method 2 with CRS
+		// Method 2 with CRS as storage format
 		printf("\nMethod 2 with CRS as storage format\nWeb graph: '%s'\n", argv[1]);
 
 		int *row_ptr;
@@ -65,9 +67,8 @@ int main(int argc, char *argv[])
 		int *num_involvements = calloc((N), sizeof(*num_involvements));
 		mutual_links = count_mutual_links2(N, N_links, row_ptr, col_idx, num_involvements);
 		printf("Total number of mutual links: %d\n", mutual_links);
-		printf("Top %d webpages:\n", n);
 		//top_n_webpages(N, num_involvements, n);
-		top_n_webpages_serial_faster(N, num_involvements, n); // this is the fastest
+		top_n_webpages_serial_faster(N, num_involvements, n);    // this is the fastest
 
 		free(row_ptr);
 		free(col_idx);

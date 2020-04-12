@@ -34,6 +34,21 @@ def fig_path(fig_id):
 def benchmark(graphfiles, filename, Nrep, max_nthreads, fsave, show=False):
     """
     Benchmark all parallelized functions with varying number of threads
+
+    Parameters
+        ----------
+        graphfiles : list of str
+            List of web graph files to be benchmarked
+        filename : str
+            Filename of program to be benchmarked
+        Nrep : int
+            Number of function call repetitions in benchmark
+        max_nthreads : int
+            The maximum number of threads to be used
+        fsave : str
+            Filename to save resulting plot as
+        show : bool, default=False
+            If True, plot is shown
     """
     os.system('make benchmark.x')
     fig = plt.figure(figsize=(8, 6))
@@ -45,13 +60,13 @@ def benchmark(graphfiles, filename, Nrep, max_nthreads, fsave, show=False):
                 special_case = "top_n_webpages_serial.c"
                 print(f"=> Run with {i+1} threads <=")
                 os.system('export OMP_NUM_THREADS=' + str(i + 1))
-                os.system('./benchmark_omp.x ' + special_case + " " +
+                os.system('./benchmark.x ' + special_case + " " +
                           graphfile + " " + str(Nrep))
                 times[i] = np.loadtxt('time.txt')
             else:
                 print(f"=> Run with {i+1} threads <=")
                 os.system('export OMP_NUM_THREADS=' + str(i + 1))
-                os.system('./benchmark_omp.x ' + filename + " " +
+                os.system('./benchmark.x ' + filename + " " +
                           graphfile + " " + str(Nrep))
                 times[i] = np.loadtxt('time.txt')
 
@@ -72,24 +87,16 @@ if __name__ == "__main__":
     graphfiles1 = ["data/8-webpages.txt", "data/100nodes_graph.txt"]
     graphfiles2 = ["data/web-NotreDame.txt",
                    "data/web-Stanford.txt", "data/web-BerkStan.txt"]
-
-    benchmark_read_graph(
-        graphfiles1, "read_graph_from_file1.c", 10000, "read1_test_set.png")
-
-    benchmark_read_graph(
-        graphfiles1, "read_graph_from_file2.c", 10000, "read2_test_set.png")
-
-    benchmark_read_graph(
-        graphfiles2, "read_graph_from_file2.c", 20, "read2_real_set.png")
-
-    benchmark(graphfiles1, "count_mutual_links1.c",
-              10000, 4, "count1_test_set.png")
-
+    # Benchmark count_mutual_links1 with test web graphs. 10 000 reps
+    benchmark(graphfiles1, "count_mutual_links1.c", 10000, 4,
+              "count1_test_set.png")
+    # Benchmark count_mutual_links2 with test web graphs. 10 000 reps
     benchmark(graphfiles1, "count_mutual_links2.c",
               10000, 4, "count2_test_set.png")
-
+    # Benchmark count_mutual_links2 with real-world web graphs. 10 000 reps
     benchmark(graphfiles2, "count_mutual_links2.c",
               10000, 4, "count2_real_set.png")
-
+    # Benchmark calc_top_n_webpages with test web graphs. 10 000 reps
     benchmark(graphfiles1, "top_n_webpages.c", 10000, 4, "top_n_test_set.png")
+    # Benchmark calc_top_n_webpages with real-world web graphs. 500 reps
     benchmark(graphfiles2, "top_n_webpages.c", 500, 4, "top_n_real_set.png")

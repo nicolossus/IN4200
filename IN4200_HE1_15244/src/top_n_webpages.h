@@ -3,6 +3,7 @@
 #ifndef TOP_N_WEBPAGES_H
 #define TOP_N_WEBPAGES_H
 
+// Define function for finding index of maximum value in array
 #define MAXIDX(oldidx, i, arr) (((arr[oldidx]) > (arr[i])) ? (oldidx) : (i))
 
 //=================================
