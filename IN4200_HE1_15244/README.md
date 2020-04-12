@@ -12,7 +12,8 @@ This project was embarked on in collaboration with candidate 15224. Hence, our i
 ### Contents
 
 - The **``data``** folder contains:
-  - **``8-webpages.txt``** - small and simple web graph used to test and verify the implementation.
+  - **``8-webpages.txt``**
+    - small and simple web graph used to test and verify the implementation.
   - **``100nodes_graph.txt``** - slightly larger web graph than the one above. Also used to verify the implementation.
   - **``web-NotreDame.txt``** - real-world web graph
   - **``webgraphs_download_instructions.txt``** - links to other, as well as the aforementioned, web graphs used in the benchmarking.
