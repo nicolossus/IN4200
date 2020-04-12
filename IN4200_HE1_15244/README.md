@@ -14,24 +14,38 @@ This project was embarked on in collaboration with candidate 15224. Hence, our i
 - The **``data``** folder contains:
   - **``8-webpages.txt``**
     - small and simple web graph used to test and verify the implementation.
-  - **``100nodes_graph.txt``** - slightly larger web graph than the one above. Also used to verify the implementation.
-  - **``web-NotreDame.txt``** - real-world web graph
-  - **``webgraphs_download_instructions.txt``** - links to other, as well as the aforementioned, web graphs used in the benchmarking.
+  - **``100nodes_graph.txt``**
+    - slightly larger web graph than the one above. Also used to verify the implementation.
+  - **``web-NotreDame.txt``**
+    - real-world web graph
+  - **``webgraphs_download_instructions.txt``**
+    - links to other, as well as the aforementioned, web graphs used in the benchmarking.
 
 - The **``report``** folder contains:
-  - **``in3200_in4200_home_exam1_v20.pdf``** - project description.
-  - **``IN4200__Home_Exam_1.pdf``** - project report.
+  - **``in3200_in4200_home_exam1_v20.pdf``**
+    - project description.
+  - **``IN4200__Home_Exam_1.pdf``**
+    - project report.
 
 - The **``results``** folder contains:
-  - **``test_results.txt``** - results from running the test program for all implemented functions. Reproduce output with ``bash run_test.sh``.
-  - **``benchmark_read_graph.txt``** - benchmark results for the functions ``read_graph_from_file1`` and ``read_graph_from_file2``. Reproduce output with ``bash run_benchmark.sh``.
-  - **``count1_test_set.png``** - Plot of benchmark results with varying number of threads for the function ``count_mutual_links1`` with web graphs ``8-webpages.txt`` and ``100nodes_graph.txt``.
-  - **``count2_test_set.png``** - Plot of benchmark results with varying number of threads for the function ``count_mutual_links2`` with web graphs ``8-webpages.txt`` and ``100nodes_graph.txt``.
-  - **``count2_real_set.png``** - Plot of benchmark results with varying number of threads for the function ``count_mutual_links2`` with web graphs ``web-NotreDame.txt``, ``web-Stanford`` and ``web-BerkStan.txt``.
-  - **``top_n_test_set.png``** - Plot of benchmark results with varying number of threads for the function ``top_n_webpages`` with web graphs ``8-webpages.txt`` and ``100nodes_graph.txt``.
-  - **``top_n_real_set.png``** - Plot of benchmark results with varying number of threads for the function ``top_n_webpages`` with web graphs ``web-NotreDame.txt``, ``web-Stanford.txt`` and ``web-BerkStan.txt``.
-  - **``main_serial_output.txt``** - output from main when running the code in serial. Reproduce output with ``bash run_main_serial.sh``.
-  - **``main_omp_output.txt``** - output from main when running the code in parallel. Reproduce output with ``bash run_main_omp.sh``.
+  - **``test_results.txt``**
+    - results from running the test program for all implemented functions. Reproduce output with ``bash run_test.sh``.
+  - **``benchmark_read_graph.txt``**
+    - benchmark results for the functions ``read_graph_from_file1`` and ``read_graph_from_file2``. Reproduce output with ``bash run_benchmark.sh``.
+  - **``count1_test_set.png``**
+    - Plot of benchmark results with varying number of threads for the function ``count_mutual_links1`` with web graphs ``8-webpages.txt`` and ``100nodes_graph.txt``.
+  - **``count2_test_set.png``**
+    - Plot of benchmark results with varying number of threads for the function ``count_mutual_links2`` with web graphs ``8-webpages.txt`` and ``100nodes_graph.txt``.
+  - **``count2_real_set.png``**
+    - Plot of benchmark results with varying number of threads for the function ``count_mutual_links2`` with web graphs ``web-NotreDame.txt``, ``web-Stanford`` and ``web-BerkStan.txt``.
+  - **``top_n_test_set.png``**
+    - Plot of benchmark results with varying number of threads for the function ``top_n_webpages`` with web graphs ``8-webpages.txt`` and ``100nodes_graph.txt``.
+  - **``top_n_real_set.png``**
+    - Plot of benchmark results with varying number of threads for the function ``top_n_webpages`` with web graphs ``web-NotreDame.txt``, ``web-Stanford.txt`` and ``web-BerkStan.txt``.
+  - **``main_serial_output.txt``**
+    - output from main when running the code in serial. Reproduce output with ``bash run_main_serial.sh``.
+  - **``main_omp_output.txt``**
+    - output from main when running the code in parallel. Reproduce output with ``bash run_main_omp.sh``.
 
 
 
