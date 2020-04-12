@@ -37,6 +37,8 @@ int main(int argc, char *argv[])
 
 	if (flag == 1) {
 		// Method 1 with 2D table
+		printf("\nMethod 1 with 2D table as storage format\nWeb graph: '%s'\n", argv[1]);
+
 		char **table2D;
 		int N, mutual_links;
 
@@ -44,6 +46,7 @@ int main(int argc, char *argv[])
 		int *num_involvements = calloc((N), sizeof(*num_involvements));
 		mutual_links = count_mutual_links1(N, table2D, num_involvements);
 		printf("Total number of mutual links: %d\n", mutual_links);
+		printf("Top %d webpages:\n", n);
 		//top_n_webpages(N, num_involvements, n);
 		top_n_webpages_serial_faster(N, num_involvements, n); // this is the fastest
 
@@ -52,6 +55,8 @@ int main(int argc, char *argv[])
 	}
 	else if (flag==2) {
 		// Method 2 with CRS
+		printf("\nMethod 2 with CRS as storage format\nWeb graph: '%s'\n", argv[1]);
+
 		int *row_ptr;
 		int *col_idx;
 		int N, N_links, mutual_links;
@@ -60,6 +65,7 @@ int main(int argc, char *argv[])
 		int *num_involvements = calloc((N), sizeof(*num_involvements));
 		mutual_links = count_mutual_links2(N, N_links, row_ptr, col_idx, num_involvements);
 		printf("Total number of mutual links: %d\n", mutual_links);
+		printf("Top %d webpages:\n", n);
 		//top_n_webpages(N, num_involvements, n);
 		top_n_webpages_serial_faster(N, num_involvements, n); // this is the fastest
 

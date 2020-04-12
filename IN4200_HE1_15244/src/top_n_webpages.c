@@ -14,8 +14,8 @@ void top_n_webpages(int num_webpages, int *num_involvements, int n)
 	calc_top_n_webpages(num_webpages, num_involvements, top_results, n);
 
 	for (int i=0; i<n; i++) {
-		printf("Webpage node %d ranks %d with %d involvements\n",
-		       top_results[i], i+1, num_involvements[top_results[i]]);
+		printf("%d. w%d is involved %d times\n",
+		       i+1, top_results[i]+1, num_involvements[top_results[i]]);
 	}
 	free(top_results);
 }
@@ -61,7 +61,6 @@ void calc_top_n_webpages(int num_webpages, int *num_involvements, int *top_resul
 						}
 					}
 				}
-				// outer
 				top_results_tmp[id*n+i] = top_webpage;
 				num_involvements_cpy[top_webpage] = -1;
 			}
@@ -116,8 +115,8 @@ void top_n_webpages_serial_faster(int num_webpages, int *num_involvements, int n
 		for (int j=0; j<num_webpages; j++) {
 			top_webpage = MAXIDX(top_webpage, j, num_involvements_cpy);
 		}
-		printf("Webpage node %d ranks %d with %d involvements\n", top_webpage,
-		       i+1, num_involvements_cpy[top_webpage]);
+		printf("%d. w%d is involved %d times\n",
+		       i+1, top_webpage+1, num_involvements[top_webpage]);
 		num_involvements_cpy[top_webpage] = -1;
 	}
 

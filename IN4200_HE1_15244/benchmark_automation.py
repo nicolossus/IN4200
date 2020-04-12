@@ -35,7 +35,7 @@ def benchmark(graphfiles, filename, Nrep, max_nthreads, fsave, show=False):
     """
     Benchmark all parallelized functions with varying number of threads
     """
-    os.system('make benchmark_omp.x')
+    os.system('make benchmark.x')
     fig = plt.figure(figsize=(8, 6))
     for graphfile in graphfiles:
         times = np.zeros(max_nthreads)
@@ -73,11 +73,23 @@ if __name__ == "__main__":
     graphfiles2 = ["data/web-NotreDame.txt",
                    "data/web-Stanford.txt", "data/web-BerkStan.txt"]
 
-    #benchmark(graphfiles1, "count_mutual_links1.c",10000, 4, "count1_test_set.png")
+    benchmark_read_graph(
+        graphfiles1, "read_graph_from_file1.c", 10000, "read1_test_set.png")
 
-    #benchmark(graphfiles1, "count_mutual_links2.c", 10000, 4, "count2_test_set.png")
+    benchmark_read_graph(
+        graphfiles1, "read_graph_from_file2.c", 10000, "read2_test_set.png")
 
-    #benchmark(graphfiles2, "count_mutual_links2.c", 10000, 4, "count2_real_set.png")
+    benchmark_read_graph(
+        graphfiles2, "read_graph_from_file2.c", 20, "read2_real_set.png")
+
+    benchmark(graphfiles1, "count_mutual_links1.c",
+              10000, 4, "count1_test_set.png")
+
+    benchmark(graphfiles1, "count_mutual_links2.c",
+              10000, 4, "count2_test_set.png")
+
+    benchmark(graphfiles2, "count_mutual_links2.c",
+              10000, 4, "count2_real_set.png")
 
     benchmark(graphfiles1, "top_n_webpages.c", 10000, 4, "top_n_test_set.png")
     benchmark(graphfiles2, "top_n_webpages.c", 500, 4, "top_n_real_set.png")

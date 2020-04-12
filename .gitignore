@@ -10,6 +10,8 @@
 *.x
 .cache
 .pytest_cache
+web-Stanford.txt
+web-BerkStan.txt
 
 ### C ###
 # Prerequisites

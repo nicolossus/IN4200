@@ -27,10 +27,7 @@ main_omp.x : main.c $(DEP)
 test.x : test.c $(DEP)
 	$(CC) $< -o $@ $(OBJ) $(CFLAGS)
 
-benchmark_serial.x : benchmark.c $(DEP)
-	$(CC) $< -o $@ $(OBJ) $(CFLAGS)
-
-benchmark_omp.x : benchmark.c $(DEP)
+benchmark.x : benchmark.c $(DEP)
 	$(CC) -fopenmp $< -o $@ $(OBJ) $(CFLAGS)
 
 clean:

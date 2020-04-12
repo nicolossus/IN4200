@@ -1,0 +1,11 @@
+Download locations if web graphs are missing from the data folder:
+
+8-webpages.txt: can be found in assignment description.
+
+100nodes_graph.txt: https://www.uio.no/studier/emner/matnat/ifi/IN3200/v19/teaching-material/100nodes_graph.txt
+
+web-NotreDame.txt: https://snap.stanford.edu/data/web-NotreDame.html
+
+web-Stanford.txt: https://snap.stanford.edu/data/web-Stanford.html
+
+web-BerkStan.txt: https://snap.stanford.edu/data/web-BerkStan.html

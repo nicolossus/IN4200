@@ -1,0 +1,61 @@
+-----------------------------------
+Benchmark 'read_graph_from_file1.c'
+-----------------------------------
+Web graph file: 'data/8-webpages.txt'
+
+Time usage averaged over 10000 repetitions:
+read_graph_from_file1()  took 0.019763 milliseconds to execute
+
+
+-----------------------------------
+Benchmark 'read_graph_from_file1.c'
+-----------------------------------
+Web graph file: 'data/100nodes_graph.txt'
+
+Time usage averaged over 10000 repetitions:
+read_graph_from_file1()  took 0.086294 milliseconds to execute
+
+
+-----------------------------------
+Benchmark 'read_graph_from_file2.c'
+-----------------------------------
+Web graph file: 'data/8-webpages.txt'
+
+Time usage averaged over 10000 repetitions:
+read_graph_from_file2()  took 0.016109 milliseconds to execute
+
+
+-----------------------------------
+Benchmark 'read_graph_from_file2.c'
+-----------------------------------
+Web graph file: 'data/100nodes_graph.txt'
+
+Time usage averaged over 10000 repetitions:
+read_graph_from_file2()  took 0.053216 milliseconds to execute
+
+
+-----------------------------------
+Benchmark 'read_graph_from_file2.c'
+-----------------------------------
+Web graph file: 'data/web-NotreDame.txt'
+
+Time usage averaged over 20 repetitions:
+read_graph_from_file2()  took 322.986352 milliseconds to execute
+
+
+-----------------------------------
+Benchmark 'read_graph_from_file2.c'
+-----------------------------------
+Web graph file: 'data/web-Stanford.txt'
+
+Time usage averaged over 20 repetitions:
+read_graph_from_file2()  took 600.919449 milliseconds to execute
+
+
+-----------------------------------
+Benchmark 'read_graph_from_file2.c'
+-----------------------------------
+Web graph file: 'data/web-BerkStan.txt'
+
+Time usage averaged over 10 repetitions:
+read_graph_from_file2()  took 1645.548701 milliseconds to execute
