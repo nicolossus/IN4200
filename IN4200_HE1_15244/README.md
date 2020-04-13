@@ -108,7 +108,8 @@ This project was embarked on in collaboration with candidate 15224. Hence, our i
 - **MAIN PROGRAM - Serial version**
   - Compile:
     - ``make main_serial.x``
-  - Run: ``./main.x webgraph_filename method n``
+  - Run:
+    - ``./main.x webgraph_filename method n``
   - Example: Method 1 with 2D table as storage format for finding the top 8 webpages in ``8-webpages.txt``.
     - ``./main.x "data/8-webpages.txt" 1 8``
   - Example: Method 2 with CRS as storage format for finding the top 10 webpages in ``100nodes-graph.txt``.
