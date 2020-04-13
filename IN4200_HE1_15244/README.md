@@ -11,7 +11,7 @@ In this project, the goal was to develop code for reading and storing web graphs
 **Disclaimer:**
 This project was embarked on in collaboration with candidate 15224. Hence, our individual programs have a strong resemblance in both presentation and content.
 
-**WARNING:** To run on IFI machines a change must be made in
+**WARNING:** To run the parallelized code on IFI machines a change must be made in ``count_mutual_links2.c``. Array reduction is only possible with OpenMP 4.5, which is not installed on IFI's student server. The code runs with the pragma declaration without num_involvements[:N] in the reduction, but this does not always yield the correct results. To run on IFI machines, change which #pragma is commented out.
 
 ### Contents
 
@@ -105,28 +105,42 @@ This project was embarked on in collaboration with candidate 15224. Hence, our i
 ### Compile and usage
 
 - **MAIN PROGRAM - Serial version**
-  - Compile: ``make main_serial.x``.
-  - Run: ``./main.x webgraph_filename method n``.
-  - Example: ``./main.x "data/8-webpages.txt" 1 8`` for method 1 with 2D table as storage format for finding the top 8 webpages in ``8-webpages.txt``.
-  - Example: ``./main.x "data/8-webpages.txt" 2 10`` for method 2 with CRS as storage format for finding the top 10 webpages in ``100nodes-graph.txt``.
+  - Compile:
+    - ``make main_serial.x``
+  - Run: ``./main.x webgraph_filename method n``
+  - Example: Method 1 with 2D table as storage format for finding the top 8 webpages in ``8-webpages.txt``.
+    - ``./main.x "data/8-webpages.txt" 1 8``
+  - Example: Method 2 with CRS as storage format for finding the top 10 webpages in ``100nodes-graph.txt``.
+    - ``./main.x "data/8-webpages.txt" 2 10``
 
 - **MAIN PROGRAM - Parallelized version**
-  - Compile: ``make main_omp.x``
-  - Run: ``export OMP_NUM_THREADS=N`` followed by ``./main.x webgraph_filename method n``.
-  - Example: ``export OMP_NUM_THREADS=4`` followed by ``./main.x "data/8-webpages.txt" 2 8``.
+  - Compile:
+    - ``make main_omp.x``
+  - Run:
+    - ``export OMP_NUM_THREADS=N``
+    - ``./main.x webgraph_filename method n``
+  - Example:
+    - ``export OMP_NUM_THREADS=4``
+    - ``./main.x "data/8-webpages.txt" 2 8``
 
 - **TEST PROGRAM**  
-  - Compile: ``make test.x``.
-  - Run: ``./test.x program_filename``.
-  - Example: ``./test.x "count_mutual_links1.c"``.
-  - Run all tests: ``./test.x "all"``.
+  - Compile:
+    - ``make test.x``
+  - Run:
+    - ``./test.x program_filename``
+  - Example:
+    - ``./test.x "count_mutual_links1.c"``
+  - Run all tests:
+    - ``./test.x "all"``
 
 - **BENCHMARK PROGRAM**  
   - Compile:
-    - ``make benchmark.x``.
-  - Run: ``./benchmark.x program_filename webgraph_filename Nrep``.
-  - Example: ``./benchmark.x "read_graph_from_file1.c" "data/8-webpages.txt" 100``.
+    - ``make benchmark.x``
+  - Run:
+    - ``./benchmark.x program_filename webgraph_filename Nrep``
+  - Example:
+    - ``./benchmark.x "read_graph_from_file1.c" "data/8-webpages.txt" 100``
 
 - **CLEAN DIRECTORY**  
   - To clean directory for object files, executables and output text files:
-    - ``make clean``.
+    - ``make clean``
