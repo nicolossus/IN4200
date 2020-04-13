@@ -82,7 +82,7 @@ This project was embarked on in collaboration with candidate 15224. Hence, our i
   - Test program. Contains procedures for unit testing all implemented functions.
 
 - **``benchmark.c``**:
-  - Benchmark program. Contains procedures for benchmarking all implemented functions.
+  - Benchmark program. Contains procedures for benchmarking all implemented functions. The performance metric is the runtime, which is averaged over *Nrep* number of function call repetitions.
 
 - **``benchmark_automation.py``**:
   - Program that automates the benchmarking and produces plots of the time usage as a function of varying number of threads for selected web graphs. Run with ``python3 benchmark_automation.py``.
@@ -104,46 +104,29 @@ This project was embarked on in collaboration with candidate 15224. Hence, our i
 
 ### Compile and usage
 
-**MAIN PROGRAM**
-
 - **MAIN PROGRAM - Serial version**
   - Compile: ``make main_serial.x``.
   - Run: ``./main.x webgraph_filename method n``.
   - Example: ``./main.x "data/8-webpages.txt" 1 8`` for method 1 with 2D table as storage format for finding the top 8 webpages in ``8-webpages.txt``.
   - Example: ``./main.x "data/8-webpages.txt" 2 10`` for method 2 with CRS as storage format for finding the top 10 webpages in ``100nodes-graph.txt``.
 
-- **Parallelized version**
+- **MAIN PROGRAM - Parallelized version**
   - Compile: ``make main_omp.x``
   - Run: ``export OMP_NUM_THREADS=N`` followed by ``./main.x webgraph_filename method n``.
   - Example: ``export OMP_NUM_THREADS=4`` followed by ``./main.x "data/8-webpages.txt" 2 8``.
 
-**TEST PROGRAM**  
+- **TEST PROGRAM**  
+  - Compile: ``make test.x``.
+  - Run: ``./test.x program_filename``.
+  - Example: ``./test.x "count_mutual_links1.c"``.
+  - Run all tests: ``./test.x "all"``.
 
-- Compile: ``make test.x``.
-- Run: ``./test.x program_filename``.
-- Example: ``./main.x "data/8-webpages.txt" 2 8``.
+- **BENCHMARK PROGRAM**  
+  - Compile:
+    - ``make benchmark.x``.
+  - Run: ``./benchmark.x program_filename webgraph_filename Nrep``.
+  - Example: ``./benchmark.x "read_graph_from_file1.c" "data/8-webpages.txt" 100``.
 
-
-TEST PROGRAM
-test.c contains procedures for unit testing the functions implemented in the src
-folder. See the program for further documentation.
-
-Compile: make test
-Run: ./test.x program_filename
-Example run: ./test.x "count_mutual_links1.c"
-Run all tests: ./test.x "all"
-
-BENCHMARK PROGRAM
-benchmark.c contains procedures for benchmarking the performance of the functions
-implemented in the src folder. The performance metric is the runtime, which is
-averaged from Nrep number of function call repetitions. See the program for
-further documentation.
-
-Compile: make benchmark.x
-Run: ./benchmark.x program_filename webgraph_filename Nrep
-Example run: ./benchmark.x "read_graph_from_file1.c" "data/8-webpages.txt" 100
-Run all benchmarks:
-Note: With "all", the number of repetitions is hardcoded in the program.
-
-CLEAN DIRECTORY
-To clean directory for object files and executables, run make clean
+- **CLEAN DIRECTORY**  
+  - To clean directory for object files, executables and output text files:
+    - ``make clean``.
