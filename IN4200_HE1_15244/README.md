@@ -5,7 +5,9 @@
 **Candidate: 15244**
 
 In this project, the goal was to develop code for reading and storing web graphs, as well as counting mutual web linkage occurrences and ranking the top n webpages. Functions for the two latter procedures are implemented as both serial and parallelized (with OpenMP) code. Two methods for storing the web graph are deployed:
+
 	1. 2D table as storage format
+  
   2. Compressed row storage (CRS) as storage format
 
 **Disclaimer:**
