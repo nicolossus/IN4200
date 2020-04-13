@@ -29,7 +29,7 @@ void benchmark_method2(char*, int);
 //============================================================================
 int main(int argc, char *argv[])
 //----------------------------------------------------------------------------
-// Benchmark implemented functions. Specify filename of
+// Benchmark implemented functions.
 //
 // Parameters given on command line
 // --------------------------------
@@ -266,12 +266,12 @@ void benchmark_calc_top_n_webpages(char *graphfile, int Nrep)
 // This only benchmarks the implementation of calc_top_n_webpages(), which
 // searches the num_involvements array for the indices corresponding to the n
 // top webpage nodes and stores them in top_results.
-// It is deemed to verbose to benchmark top_n_webpages(), as it print results
+// It is deemed to verbose to benchmark top_n_webpages(), as it prints results
 // to screen with each call. Time used by the printf function is not extensive,
 // but the complexity of the for-loop in top_n_webpages() which prints goes as
 // n. For normal use cases this is not significant, but for larger n the
 // execution time of top_n_webpages() will be longer than calc_top_n_webpages().
-// To accomendate for this the function top_n_webpages_faster() has also been
+// To accommodate for this the function top_n_webpages_faster() has also been
 // implemented, which calculates and prints with complexity N*n rather than
 // N*n+n in top_n_webpages()
 //

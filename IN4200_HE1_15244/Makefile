@@ -9,9 +9,7 @@ ifeq ($(UNAME), Linux)
 CC := gcc
 endif
 
-#CFLAGS := -Wall -std=c11 -O3
 CFLAGS := -O3 -std=c11
-PROFILE := -pg
 
 DEP = $(wildcard src/*.h)
 OBJ = $(wildcard src/*.c)
@@ -31,6 +29,4 @@ benchmark.x : benchmark.c $(DEP)
 	$(CC) -fopenmp $< -o $@ $(OBJ) $(CFLAGS)
 
 clean:
-	rm -f *.o *.x
-
-print-%  : ; @echo $* = $($*)
+	rm -f *.o *.x time.txt

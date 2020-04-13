@@ -3,7 +3,7 @@
 //=============================================================================
 int count_mutual_links1(int N, char **table2D, int *num_involvements)
 //----------------------------------------------------------------------------
-// Count the total number of mutual webpage linkage occurences, as well as the
+// Count the total number of mutual webpage linkage occurrences, as well as the
 // number of times that a webpage is involved as outbound for the mutual web
 // linkages.
 //
@@ -30,9 +30,9 @@ int count_mutual_links1(int N, char **table2D, int *num_involvements)
 		// Parallelized version
 
 		#pragma omp parallel for private(counter) reduction(+:mutual_links)
-		for (size_t i=0; i<N; i++) {
+		for (int i=0; i<N; i++) {
 			counter = 0;  // Reset for each row (or webpage)
-			for (size_t j=0; j<N; j++) {
+			for (int j=0; j<N; j++) {
 				// Adds 1 to counter if column j has a direct link
 				counter += table2D[i][j];
 			}

@@ -18,14 +18,14 @@ void read_graph_from_file2(char *filename, int *N, int *N_links, int **row_ptr, 
 // ---------
 // A 2D table element is only set to 1 if there is a direct link. In most cases
 // N_links is relatively small compared to N, which means that most of the
-// values in the 2D will be zero. This can result in a huge waste of storage.
-// By adopting the compressed row storage (CRS) format, the waste is avoided.
-// The idea is that two 1D arrays of integer values are enough to store the
-// data. The col_idx array of length N_links stores, row by row, the column
+// values in the 2D table will be zero. This can result in a huge waste of
+// storage. By adopting the compressed row storage (CRS) format, the waste is
+// avoided. The idea is that two 1D arrays of integer values are enough to store
+// the data. The col_idx array of length N_links stores, row by row, the column
 // indices corresponding to all the direct links. The row_ptr array of length
 // N+1 contains the indices at which new rows start in col_idx. Usually there
 // is also a val array of length N_links which contains the values, but since
-// values are 1 if there is a direct link and zero else it is not needed.
+// values are 1 if there is a direct link and zero otherwise, it is not needed.
 //
 // Arguments
 // ---------
@@ -73,7 +73,7 @@ void read_graph_from_file2(char *filename, int *N, int *N_links, int **row_ptr, 
 	}
 
 	// Cumulative summation yielding the indices at which new rows start in col_idx
-	for (int i = 1; i < (*N)+1; i++) {
+	for (size_t i = 1; i < (*N)+1; i++) {
 		(*row_ptr)[i] += (*row_ptr)[i-1];
 	}
 
@@ -81,9 +81,6 @@ void read_graph_from_file2(char *filename, int *N, int *N_links, int **row_ptr, 
 	// ensures that no values in col_idx is overwritten by offsetting the row
 	// indices if already accessed.
 	for (size_t i=0; i<*N_links; i++) {
-		printf("ToNode[i] = %d\n", ToNode[i]);
-		printf("counter[ToNode[i]] = %d\n", counter[ToNode[i]]);
-		printf("row_ptr = %d\n", (*row_ptr)[ToNode[i]] + counter[ToNode[i]]);
 		(*col_idx)[(*row_ptr)[ToNode[i]] + counter[ToNode[i]]] = FromNode[i];
 		counter[ToNode[i]]++;
 	}

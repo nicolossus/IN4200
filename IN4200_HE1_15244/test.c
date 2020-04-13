@@ -78,7 +78,8 @@ int main(int argc, char *argv[])
 	else
 	{
 		printf("Provided filename not valid. Provide one of the following:\n" );
-		printf("'read_graph_from_file1.c'\n'read_graph_from_file2.c'\n");
+		printf("'read_graph_from_file1.c'\n'read_graph_from_file2.c'\n\
+		'count_mutual_links1.c'\n'count_mutual_links2.c'\n'top_n_webpages.c'");
 		printf("'all' to test all\n");
 		exit(0);
 	}

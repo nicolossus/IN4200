@@ -18,7 +18,7 @@
 int main(int argc, char *argv[])
 //----------------------------------------------------------------------------
 // Count mutual web linkage occurrences and rank top n webpages of web graphs.
-// Two methods for storing the web graph is deployed:
+// Two methods for storing the web graph are deployed:
 // 			1. 2D table as storage format
 //      2. Compressed row storage (CRS) as storage format
 //
@@ -49,8 +49,8 @@ int main(int argc, char *argv[])
 		int *num_involvements = calloc((N), sizeof(*num_involvements));
 		mutual_links = count_mutual_links1(N, table2D, num_involvements);
 		printf("Total number of mutual links: %d\n", mutual_links);
-		//top_n_webpages(N, num_involvements, n);
-		top_n_webpages_serial_faster(N, num_involvements, n); // this is the fastest
+		top_n_webpages(N, num_involvements, n);
+		//top_n_webpages_serial_faster(N, num_involvements, n); // this is the fastest
 
 		freetable(table2D);
 		free(num_involvements);

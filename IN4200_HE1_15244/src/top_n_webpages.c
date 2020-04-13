@@ -8,9 +8,9 @@
 
    top_n_webpages() is a wrapper function for calc_top_n_webpages() which
    prints the results calculated by the latter. The rationale for doing the
-   calculation of the top results in a seperate function were that is was
+   calculation of the top results in a seperate function were that it was
    deemed to verbose to print the results in the benchmark and test programs.
-   Thus, the benchmark and test program calls the calc_top_n_webpages()
+   Thus, the benchmark and test program call the calc_top_n_webpages()
    function.
 
    The 3rd function, top_n_webpages_serial_faster, both calculates and prints
@@ -104,7 +104,7 @@ void calc_top_n_webpages(int num_webpages, int *num_involvements, int *top_resul
 					for (int j=id*num_webpages/Nt; j<(id+1)*num_webpages/Nt; j++) {
 						// Find the index (corresponds to webpage node) with maximum number
 						// of involvements
-						if (num_involvements_cpy[top_webpage]<=num_involvements_cpy[j]) {
+						if (num_involvements_cpy[top_webpage] < num_involvements_cpy[j]) {
 							top_webpage = j;
 						}
 					}
@@ -112,7 +112,7 @@ void calc_top_n_webpages(int num_webpages, int *num_involvements, int *top_resul
 				else{
 					// Same as above for remaining part of list
 					for (int j=id*num_webpages/Nt; j<num_webpages; j++) {
-						if (num_involvements_cpy[top_webpage]<=num_involvements_cpy[j]) {
+						if (num_involvements_cpy[top_webpage] < num_involvements_cpy[j]) {
 							top_webpage = j;
 						}
 					}
@@ -132,12 +132,12 @@ void calc_top_n_webpages(int num_webpages, int *num_involvements, int *top_resul
 				// Recopy the num_involvements array since the previous copy is mutated
 				memcpy(num_involvements_cpy, num_involvements, num_webpages*sizeof(num_involvements));
 
-				for (int i = 0; i<n; i++) {
+				for (int i=0; i<n; i++) {
 					// For each webpage to rank
-					for (int j = 0; j<n*Nt; j++) {
+					for (int j=0; j<n*Nt; j++) {
 						// Find the index (corresponds to webpage node) with maximum number
 						// of involvements
-						if (num_involvements_cpy[top_webpage] <= num_involvements_cpy[top_results_tmp[j]]) {
+						if (num_involvements_cpy[top_webpage] < num_involvements_cpy[top_results_tmp[j]]) {
 							top_webpage = top_results_tmp[j];
 						}
 					}

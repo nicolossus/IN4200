@@ -3,7 +3,7 @@
 //=============================================================================
 int count_mutual_links2(int N, int N_links, int *row_ptr, int *col_idx, int *num_involvements)
 //----------------------------------------------------------------------------
-// Count the total number of mutual webpage linkage occurences, as well as the
+// Count the total number of mutual webpage linkage occurrences, as well as the
 // number of times that a webpage is involved as outbound for the mutual web
 // linkages.
 //
@@ -31,7 +31,14 @@ int count_mutual_links2(int N, int N_links, int *row_ptr, int *col_idx, int *num
 	{
 		// Parallelized version
 
-		#pragma omp parallel for private(counter) reduction(+:mutual_links)
+		// Array reduction is only possible with OpenMP 4.5, which is not installed
+		// on IFI's student server. The code runs with the pragma declaration
+		// without num_involvements[:N] in the reduction, but this does not always
+		// yield the correct results. To run on IFI machines, change which #pragma
+		// is commented out
+
+		//#pragma omp parallel for private(counter) reduction(+:mutual_links)
+		 #pragma omp parallel for private(counter) reduction(+:mutual_links, num_involvements[:N])
 		for (int i = 0; i < N; i++) {
 			// Mutual linkage occurences in current row
 			counter = row_ptr[i+1] - row_ptr[i];
@@ -46,12 +53,13 @@ int count_mutual_links2(int N, int N_links, int *row_ptr, int *col_idx, int *num
 				num_involvements[col_idx[j]] += counter-1;
 			}
 		}
+
 	}
 	#else
 	{
 		// Serial version
 
-		for (int i = 0; i < N; i++) {
+		for (size_t i = 0; i < N; i++) {
 			// Mutual linkage occurences in current row
 			counter = row_ptr[i+1] - row_ptr[i];
 
@@ -61,7 +69,7 @@ int count_mutual_links2(int N, int N_links, int *row_ptr, int *col_idx, int *num
 
 			// Sum the number of involvements for a webpage
 			// row_start = row_ptr[i] and row_end = row_ptr[i+1]
-			for (int j = row_ptr[i]; j < row_ptr[i+1]; j++) {
+			for (size_t j = row_ptr[i]; j < row_ptr[i+1]; j++) {
 				num_involvements[col_idx[j]] += counter-1;
 			}
 		}
