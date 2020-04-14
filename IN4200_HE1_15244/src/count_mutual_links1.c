@@ -25,11 +25,11 @@ int count_mutual_links1(int N, char **table2D, int *num_involvements)
 	int mutual_links = 0;
 	int counter = 0;
 
-	#if defined(_OPENMP)
+	#ifdef _OPENMP
 	{
 		// Parallelized version
 
-		#pragma omp parallel for private(counter) reduction(+:mutual_links)
+		#pragma omp parallel for private(counter) reduction(+:mutual_links) schedule(auto)
 		for (int i=0; i<N; i++) {
 			counter = 0;  // Reset for each row (or webpage)
 			for (int j=0; j<N; j++) {

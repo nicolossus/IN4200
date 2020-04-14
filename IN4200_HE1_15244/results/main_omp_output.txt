@@ -13,14 +13,14 @@ Top 8 webpages:
 
 Method 1 with 2D table as storage format
 Web graph: 'data/100nodes_graph.txt'
-Total number of mutual links: 317
+Total number of mutual links: 316
 Top 10 webpages:
 1. w13 is involved 25 times
 2. w41 is involved 21 times
 3. w25 is involved 17 times
 4. w92 is involved 16 times
-5. w21 is involved 16 times
-6. w78 is involved 15 times
+5. w78 is involved 15 times
+6. w21 is involved 15 times
 7. w77 is involved 14 times
 8. w99 is involved 13 times
 9. w85 is involved 13 times
@@ -41,14 +41,14 @@ Top 8 webpages:
 
 Method 2 with CRS as storage format
 Web graph: 'data/100nodes_graph.txt'
-Total number of mutual links: 317
+Total number of mutual links: 316
 Top 10 webpages:
 1. w13 is involved 25 times
 2. w41 is involved 21 times
 3. w25 is involved 17 times
 4. w92 is involved 16 times
-5. w21 is involved 16 times
-6. w78 is involved 15 times
+5. w78 is involved 15 times
+6. w21 is involved 15 times
 7. w77 is involved 14 times
 8. w99 is involved 13 times
 9. w85 is involved 13 times
@@ -56,15 +56,15 @@ Top 10 webpages:
 
 Method 2 with CRS as storage format
 Web graph: 'data/web-NotreDame.txt'
-Total number of mutual links: 251035302
+Total number of mutual links: 250329403
 Top 10 webpages:
-1. w7138 is involved 57115 times
-2. w260553 is involved 42175 times
-3. w236096 is involved 42175 times
-4. w260732 is involved 42171 times
-5. w260731 is involved 42171 times
-6. w260730 is involved 42171 times
-7. w260729 is involved 42171 times
-8. w260728 is involved 42171 times
-9. w260727 is involved 42171 times
-10. w260726 is involved 42171 times
+1. w7138 is involved 56653 times
+2. w260553 is involved 42023 times
+3. w236096 is involved 41871 times
+4. w260732 is involved 41868 times
+5. w260731 is involved 41868 times
+6. w260730 is involved 41868 times
+7. w260729 is involved 41868 times
+8. w260728 is involved 41868 times
+9. w260727 is involved 41868 times
+10. w260726 is involved 41868 times

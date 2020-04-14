@@ -67,8 +67,8 @@ int main(int argc, char *argv[])
 		int *num_involvements = calloc((N), sizeof(*num_involvements));
 		mutual_links = count_mutual_links2(N, N_links, row_ptr, col_idx, num_involvements);
 		printf("Total number of mutual links: %d\n", mutual_links);
-		//top_n_webpages(N, num_involvements, n);
-		top_n_webpages_serial_faster(N, num_involvements, n);    // this is the fastest
+		top_n_webpages(N, num_involvements, n);
+		//top_n_webpages_serial_faster(N, num_involvements, n);    // this is the fastest
 
 		free(row_ptr);
 		free(col_idx);

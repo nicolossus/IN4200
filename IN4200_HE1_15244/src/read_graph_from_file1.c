@@ -55,7 +55,9 @@ void read_graph_from_file1 (char *filename, int *N, char ***table2D)
 	// to webpage i (inbound)
 	for (size_t k=0; k<nedges; k++) {
 		fscanf(datafile, "%d %d", &j, &i);
-		(*table2D)[i][j] = 1;
+		if ((i != j) && (i < (*N)) && (j < (*N)))  {  // Exclude self- and illegal links
+			(*table2D)[i][j] = 1;
+		}
 	}
 
 	fclose(datafile);

@@ -10,6 +10,7 @@
 #include <math.h>
 #include <time.h>
 #include <omp.h>
+#include <string.h>
 
 //=================================
 // Function prototypes

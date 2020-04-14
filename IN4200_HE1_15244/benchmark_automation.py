@@ -95,8 +95,8 @@ if __name__ == "__main__":
               10000, 4, "count2_test_set.png")
     # Benchmark count_mutual_links2 with real-world web graphs. 10 000 reps
     benchmark(graphfiles2, "count_mutual_links2.c",
-              10000, 4, "count2_real_set.png")
+              100, 4, "count2_real_set.png")
     # Benchmark calc_top_n_webpages with test web graphs. 10 000 reps
-    benchmark(graphfiles1, "top_n_webpages.c", 10000, 4, "top_n_test_set.png")
+    benchmark(graphfiles1, "top_n_webpages.c", 1000, 4, "top_n_test_set.png")
     # Benchmark calc_top_n_webpages with real-world web graphs. 500 reps
-    benchmark(graphfiles2, "top_n_webpages.c", 500, 4, "top_n_real_set.png")
+    benchmark(graphfiles2, "top_n_webpages.c", 100, 4, "top_n_real_set.png")

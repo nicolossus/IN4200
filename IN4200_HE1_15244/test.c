@@ -159,7 +159,6 @@ int test_read_graph_from_file1()
 	for (size_t i = 0; i < 8; ++i) {
 		for (size_t j = 0; j < 8; ++j) {
 			if (table2D_expected[i][j] != table2D[i][j]) {
-				printf("Failed test 'Compare table2D'. Entries don't match expectation.\n");
 				flag = 1;
 			}
 		}
@@ -167,6 +166,9 @@ int test_read_graph_from_file1()
 	if (flag == 0) {
 		printf("Passed test 'Compare table2D'. Entries matched expectation.\n");
 		passed_tests += 1;
+	}
+	else{
+		printf("Failed test 'Compare table2D'. Entries don't match expectation.\n");
 	}
 	printf("Read table:\n");
 	printmat(table2D, N, N);
@@ -230,13 +232,15 @@ int test_read_graph_from_file2()
 	for (size_t i=0; i<N+1; i++) {
 		if (row_ptr_expected[i] != row_ptr[i])
 		{
-			printf("Failed test 'Compare row_ptr'. Entries don't match expectation.\n");
 			flag = 1;
 		}
 	}
 	if (flag == 0) {
 		printf("Passed test 'Compare row_ptr'. Entries matched expectation.\n");
 		passed_tests += 1;
+	}
+	else{
+		printf("Failed test 'Compare row_ptr'. Entries don't match expectation.\n");
 	}
 
 	printf("Read row_ptr:\n");
@@ -247,13 +251,15 @@ int test_read_graph_from_file2()
 	for (size_t i=0; i<N_links; i++) {
 		if (col_idx_expected[i] != col_idx[i])
 		{
-			printf("Failed test 'Compare row_ptr'. Entries don't match expectation.\n");
 			flag2 = 1;
 		}
 	}
 	if (flag2 == 0) {
-		printf("Passed test 'Compare row_ptr'. Entries matched expectation.\n");
+		printf("Passed test 'Compare col_idx'. Entries matched expectation.\n");
 		passed_tests += 1;
+	}
+	else{
+		printf("Failed test 'Compare col_idx'. Entries don't match expectation.\n");
 	}
 	printf("Read col_idx:\n");
 	printvec(col_idx, N_links);
@@ -293,13 +299,13 @@ int test_count_mutual_links1()
 	printf("\nTime usage:\ncount_mutual_links1() took %f milliseconds to execute \n\n", 1000*t_tot);
 
 	// Test: Count mutual links
-	if (N == 8) {
+	if (mutual_links == 13) {
 		printf("Passed test 'Count mutual links'. Expected: 13. Found: %d\n", mutual_links);
 		passed_tests += 1;
 	}
 	else
 	{
-		printf("Failed test 'Count mutual links'. Expected: 13. Found: %d\n", N);
+		printf("Failed test 'Count mutual links'. Expected: 13. Found: %d\n", mutual_links);
 	}
 
 	// Test: Compare counted num_involvements vs expected
@@ -307,13 +313,15 @@ int test_count_mutual_links1()
 	for (size_t i=0; i<N; i++) {
 		if (num_involvements_expected[i] != num_involvements[i])
 		{
-			printf("Failed test 'Compare num_involvements'. Entries don't match expectation.\n");
 			flag = 1;
 		}
 	}
 	if (flag == 0) {
 		printf("Passed test 'Compare num_involvements'. Entries matched expectation.\n");
 		passed_tests += 1;
+	}
+	else{
+		printf("Failed test 'Compare num_involvements'. Entries don't match expectation.\n");
 	}
 
 	printf("Counted num_involvements:\n");
@@ -356,13 +364,13 @@ int test_count_mutual_links2()
 	printf("\nTime usage:\ncount_mutual_links2() took %f milliseconds to execute \n\n", 1000*t_tot);
 
 	// Test: Count mutual links
-	if (N == 8) {
+	if (mutual_links == 13) {
 		printf("Passed test 'Count mutual links'. Expected: 13. Found: %d\n", mutual_links);
 		passed_tests += 1;
 	}
 	else
 	{
-		printf("Failed test 'Count mutual links'. Expected: 13. Found: %d\n", N);
+		printf("Failed test 'Count mutual links'. Expected: 13. Found: %d\n", mutual_links);
 	}
 
 	// Test: Compare counted num_involvements vs expected
@@ -370,13 +378,15 @@ int test_count_mutual_links2()
 	for (size_t i=0; i<N; i++) {
 		if (num_involvements_expected[i] != num_involvements[i])
 		{
-			printf("Failed test 'Compare num_involvements'. Entries don't match expectation.\n");
 			flag = 1;
 		}
 	}
 	if (flag == 0) {
 		printf("Passed test 'Compare num_involvements'. Entries matched expectation.\n");
 		passed_tests += 1;
+	}
+	else{
+		printf("Failed test 'Compare num_involvements'. Entries don't match expectation.\n");
 	}
 
 	printf("Counted num_involvements:\n");
@@ -426,13 +436,15 @@ int test_calc_top_n_webpages()
 	for (size_t i=0; i<n; i++) {
 		if (top_results_expected[i] != top_results[i])
 		{
-			printf("Failed test 'Compare top_results'. Entries don't match expectation.\n");
 			flag = 1;
 		}
 	}
 	if (flag == 0) {
 		printf("Passed test 'Compare top_results'. Entries matched expectation.\n");
 		passed_tests += 1;
+	}
+	else{
+		printf("Failed test 'Compare top_results'. Entries don't match expectation.\n");
 	}
 
 	printf("Calculated top_results:\n");

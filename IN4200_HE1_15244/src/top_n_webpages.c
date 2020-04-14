@@ -85,7 +85,7 @@ void calc_top_n_webpages(int num_webpages, int *num_involvements, int *top_resul
 
 	int top_webpage = 0;
 
- #if defined(_OPENMP)
+ #ifdef _OPENMP
 	{
 		// Parallelized version
 
@@ -93,14 +93,17 @@ void calc_top_n_webpages(int num_webpages, int *num_involvements, int *top_resul
 		// to allocate sufficient storage dynamically for the top results across
 		// all threads in the team formed at the subsequent active parallel region
 		int Nt = omp_get_max_threads();
-		int *top_results_tmp = malloc(n*Nt * sizeof(*top_results_tmp));
+		int *top_results_tmp = (int *)malloc(n*Nt * sizeof(*top_results_tmp));
+		int i, j;
+		int maxval;
 
  #pragma omp parallel
 		{
 			int id = omp_get_thread_num();
 			for (int i=0; i<n; i++) {
-				if (id<Nt) {
+				if (id != Nt-1) {
 					// Split list between threads
+					maxval = -1;
 					for (int j=id*num_webpages/Nt; j<(id+1)*num_webpages/Nt; j++) {
 						// Find the index (corresponds to webpage node) with maximum number
 						// of involvements
@@ -131,7 +134,6 @@ void calc_top_n_webpages(int num_webpages, int *num_involvements, int *top_resul
 			{
 				// Recopy the num_involvements array since the previous copy is mutated
 				memcpy(num_involvements_cpy, num_involvements, num_webpages*sizeof(num_involvements));
-
 				for (int i=0; i<n; i++) {
 					// For each webpage to rank
 					for (int j=0; j<n*Nt; j++) {
@@ -151,9 +153,9 @@ void calc_top_n_webpages(int num_webpages, int *num_involvements, int *top_resul
 				}
 			}
 		}
-
 		// Deallocate top results array used by all threads
 		free(top_results_tmp);
+
 	}
  #else
 	{

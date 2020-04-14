@@ -1,5 +1,6 @@
 #include "count_mutual_links2.h"
 
+
 //=============================================================================
 int count_mutual_links2(int N, int N_links, int *row_ptr, int *col_idx, int *num_involvements)
 //----------------------------------------------------------------------------
@@ -27,7 +28,7 @@ int count_mutual_links2(int N, int N_links, int *row_ptr, int *col_idx, int *num
 	int mutual_links = 0;
 	int counter;
 
-	#if defined(_OPENMP)
+ #ifdef _OPENMP
 	{
 		// Parallelized version
 
@@ -36,9 +37,8 @@ int count_mutual_links2(int N, int N_links, int *row_ptr, int *col_idx, int *num
 		// without num_involvements[:N] in the reduction, but this does not always
 		// yield the correct results. To run on IFI machines, change which #pragma
 		// is commented out
-
-		//#pragma omp parallel for private(counter) reduction(+:mutual_links)
-		 #pragma omp parallel for private(counter) reduction(+:mutual_links, num_involvements[:N])
+//#pragma omp parallel for private(counter) reduction(+:mutual_links)
+		#pragma omp parallel for private(counter) reduction(+:mutual_links, num_involvements[:N])
 		for (int i = 0; i < N; i++) {
 			// Mutual linkage occurences in current row
 			counter = row_ptr[i+1] - row_ptr[i];
@@ -53,9 +53,8 @@ int count_mutual_links2(int N, int N_links, int *row_ptr, int *col_idx, int *num
 				num_involvements[col_idx[j]] += counter-1;
 			}
 		}
-
 	}
-	#else
+ #else
 	{
 		// Serial version
 
@@ -74,7 +73,7 @@ int count_mutual_links2(int N, int N_links, int *row_ptr, int *col_idx, int *num
 			}
 		}
 	}
-	#endif
+ #endif
 
 	return mutual_links;
 }

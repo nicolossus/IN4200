@@ -1,5 +1,6 @@
 #include "read_graph_from_file2.h"
 
+
 //=============================================================================
 void read_graph_from_file2(char *filename, int *N, int *N_links, int **row_ptr, int **col_idx)
 //----------------------------------------------------------------------------
@@ -16,9 +17,9 @@ void read_graph_from_file2(char *filename, int *N, int *N_links, int **row_ptr, 
 //
 // About CRS
 // ---------
-// A 2D table element is only set to 1 if there is a direct link. In most cases
-// N_links is relatively small compared to N, which means that most of the
-// values in the 2D table will be zero. This can result in a huge waste of
+// A 2D table element is only set to 1 if there is a direct link. In cases
+// where N is large and N_links is relatively small, most of the values
+// in the 2D table will be zero. This can result in a huge waste of
 // storage. By adopting the compressed row storage (CRS) format, the waste is
 // avoided. The idea is that two 1D arrays of integer values are enough to store
 // the data. The col_idx array of length N_links stores, row by row, the column
@@ -51,36 +52,44 @@ void read_graph_from_file2(char *filename, int *N, int *N_links, int **row_ptr, 
 	fscanf(datafile, "%*s %*s %d %*s %d \n", &*N, &*N_links);  // Read 3rd line
 	fscanf(datafile, "%*[^\n]\n");                   // Skip 4th line
 
-	// Allocate col_idx and row_ptr initialized with zeros
-	*col_idx = calloc((*N_links), sizeof(*col_idx));
-	*row_ptr = calloc((*N)+1, sizeof(*row_ptr));
+	// Allocate row_ptr initialized with zeros
+	*row_ptr = (int*)calloc((*N)+1, sizeof(*row_ptr));
 
-	// Allocate ToNode and FromNode initialized with zeros. These arrays are for
-	// storing the the indices of inbound and outbound webpages
-	int *ToNode = calloc((*N_links), sizeof(*ToNode));
-	int *FromNode = calloc((*N_links), sizeof(*FromNode));
+	// Allocate ToNode and FromNode. These arrays are for storing
+	// the indices of inbound and outbound webpages
+	int *ToNode= (int*)calloc((*N_links), sizeof(*ToNode));
+	int *FromNode = (int*)calloc((*N_links), sizeof(*FromNode));
 
-	// Allocate counter initialized with zeros. This array is for ensuring
-	// correct index offset when row_ptr is used to access col_idx in the
-	// creation of the latter
-	int *counter = calloc((*N), sizeof(*counter));
-
-	for(size_t k = 0; k < *N_links; k++) {
+	int N_links_valid = 0;
+	for(size_t k=0; k<(*N_links); k++) {
 		fscanf(datafile, "%d %d", &j, &i);
-		(*row_ptr)[i+1]++;  // count the number of direct links
-		ToNode[k] = i;
-		FromNode[k] = j;
+		if ((i != j) && (i < (*N)) && (j < (*N))) { // Exclude self- and illegal links
+			(*row_ptr)[i+1]++; // count the number of direct links
+			ToNode[N_links_valid] = i;
+			FromNode[N_links_valid] = j;
+			N_links_valid++;  // count valid links
+		}
 	}
+
+	(*N_links) = N_links_valid;  // Set N_links equal to valid links only
 
 	// Cumulative summation yielding the indices at which new rows start in col_idx
 	for (size_t i = 1; i < (*N)+1; i++) {
 		(*row_ptr)[i] += (*row_ptr)[i-1];
 	}
 
+	// Allocate col_idx initialized with zeros with length of valid links only
+	*col_idx = (int*)calloc((*N_links), sizeof(*col_idx));
+
+	// Allocate counter initialized with zeros. This array is for ensuring
+	// correct index offset when row_ptr is used to access col_idx in the
+	// creation of the latter
+	int *counter = (int*)calloc((*N), sizeof(*counter));
+
 	// Use row_ptr to access the row corresponding to a direct link. The counter
 	// ensures that no values in col_idx is overwritten by offsetting the row
 	// indices if already accessed.
-	for (size_t i=0; i<*N_links; i++) {
+	for (size_t i=0; i<(*N_links); i++) {
 		(*col_idx)[(*row_ptr)[ToNode[i]] + counter[ToNode[i]]] = FromNode[i];
 		counter[ToNode[i]]++;
 	}

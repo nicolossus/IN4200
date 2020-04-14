@@ -4,7 +4,7 @@ Test 'read_graph_from_file1.c'
 Web graph file: '8-webpages.txt' located in data folder
 
 Time usage:
-read_graph_from_file1() took 0.218000 milliseconds to execute
+read_graph_from_file1() took 0.000000 milliseconds to execute
 
 Passed test 'Read number of nodes'. Expected: 8. Found: 8
 Passed test 'Read number of edges'. Expected: 17. Found: 17
@@ -25,14 +25,14 @@ Test 'read_graph_from_file2.c'
 Web graph file: '8-webpages.txt' located in data folder
 
 Time usage:
-read_graph_from_file2() took 0.054000 milliseconds to execute
+read_graph_from_file2() took 0.000000 milliseconds to execute
 
 Passed test 'Read number of nodes'. Expected: 8. Found: 8
 Passed test 'Read number of edges'. Expected: 17. Found: 17
 Passed test 'Compare row_ptr'. Entries matched expectation.
 Read row_ptr:
 | 0 1 4 5 6 9 12 14 17 |
-Passed test 'Compare row_ptr'. Entries matched expectation.
+Passed test 'Compare col_idx'. Entries matched expectation.
 Read col_idx:
 | 6 0 2 3 0 1 2 3 6 3 4 7 4 7 4 5 6 |
 
@@ -42,7 +42,7 @@ Test 'count_mutual_links1.c'
 Web graph file: '8-webpages.txt' located in data folder
 
 Time usage:
-count_mutual_links1() took 0.027000 milliseconds to execute
+count_mutual_links1() took 0.000000 milliseconds to execute
 
 Passed test 'Count mutual links'. Expected: 13. Found: 13
 Passed test 'Compare num_involvements'. Entries matched expectation.
@@ -55,7 +55,7 @@ Test 'count_mutual_links2.c'
 Web graph file: '8-webpages.txt' located in data folder
 
 Time usage:
-count_mutual_links2() took 0.001000 milliseconds to execute
+count_mutual_links2() took 0.000000 milliseconds to execute
 
 Passed test 'Count mutual links'. Expected: 13. Found: 13
 Passed test 'Compare num_involvements'. Entries matched expectation.
@@ -68,7 +68,7 @@ Test 'top_n_webpages.c'
 Web graph file: '8-webpages.txt' located in data folder
 
 Time usage:
-calc_top_n_webpages() took 0.008000 milliseconds to execute
+calc_top_n_webpages() took 0.000000 milliseconds to execute
 
 Passed test 'Compare top_results'. Entries matched expectation.
 Calculated top_results:
