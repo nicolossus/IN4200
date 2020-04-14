@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
 		mutual_links = count_mutual_links1(N, table2D, num_involvements);
 		printf("Total number of mutual links: %d\n", mutual_links);
 		top_n_webpages(N, num_involvements, n);
-		//top_n_webpages_serial_faster(N, num_involvements, n); // this is the fastest
+		//top_n_webpages_serial_faster(N, num_involvements, n); // this is the fastest in serial
 
 		freetable(table2D);
 		free(num_involvements);
@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
 		mutual_links = count_mutual_links2(N, N_links, row_ptr, col_idx, num_involvements);
 		printf("Total number of mutual links: %d\n", mutual_links);
 		top_n_webpages(N, num_involvements, n);
-		//top_n_webpages_serial_faster(N, num_involvements, n);    // this is the fastest
+		//top_n_webpages_serial_faster(N, num_involvements, n);    // this is the fastest in serial
 
 		free(row_ptr);
 		free(col_idx);
