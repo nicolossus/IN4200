@@ -3,11 +3,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <time.h>
+#include <mpi.h>
+#include <string.h>
 #include "src/count_friends_of_ten.h"
 #include "src/helperfunc.h"
-#include "mpi.h"
 
+//=================================
+// Function prototypes
+void benchmark_serial(int Nrep);
+void benchmark_parallel(int Nrep);
 
 //============================================================================
 //-------------------------------- MAIN --------------------------------------
@@ -52,18 +56,22 @@ int main(int argc, char *argv[])
 
 
 void benchmark_serial(int Nrep){
-  int M = 10;
-  int N = 10;
+  int M = 1000;
+  int N = 1000;
   int **v, friends;
   random_matrix(&v, M, N);
-  printf("Generating a %d x %d random matrix\n", M, N);
+  printf("\nGenerating a %d x %d random matrix\n", M, N);
   double t = MPI_Wtime();
 	for (int i=0; i<Nrep; i++) {
 		friends = count_friends_of_ten(M, N, v);
 	}
 	t = MPI_Wtime() - t;
 	double t_tot = ((double)t)/Nrep;
-	printf("\nTime usage averaged over %d repetitions:\ncount_friends_of_ten()\
+	printf("Time usage averaged over %d repetitions:\ncount_friends_of_ten()\
   took %f milliseconds to execute.\n\n", Nrep, 1000*t_tot);
   free2D(v);
+}
+
+void benchmark_parallel(int Nrep){
+  printf("Worker's be workin'\n");
 }
