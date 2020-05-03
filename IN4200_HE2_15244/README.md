@@ -4,7 +4,7 @@
 
 **Candidate: 15244**
 
-In this project, the goal was to develop code for "counting triple-friends of 10", that is, counting which three neighboring numbers (in the horizontal, vertical, or diagonal directions) that sum up to 10, in a matrix with M rows and N columns of non-negative integers. The implementation is done as both serial and MPI-parallelized code.    
+In this project, the goal was to develop code for “counting triple-friends of 10”, that is, counting which three neighboring numbers (in the horizontal, vertical, or diagonal directions) that sum up to 10, in a matrix with M rows and N columns of non-negative integers. The implementation is done as both serial and MPI-parallelized code.    
 
 **Disclaimer:**
 This project was embarked on in collaboration with candidate 15224. Hence, our individual programs have a strong resemblance in both presentation and content.
@@ -17,11 +17,26 @@ This project was embarked on in collaboration with candidate 15224. Hence, our i
   - **``count_friends_of_ten.h``**
     - Header file for ``count_friends_of_ten.c``.  
   - **``mpi_count_friends_of_ten.c``**
-    - Read and store web graph in CRS format.
+    - MPI-parallelized function that that returns the number of “triple-friends of 10” inside a partition of the input 2D array assigned to worker by the master task.
   - **``mpi_count_friends_of_ten.h``**
     - Header file for ``mpi_count_friends_of_ten.c``.    
   - **``helperfunc.h``**
     - Header file containing helper functions for allocating, freeing and printing arrays
 
 - **``serial_main.c``**:
-  - Main program. Contains procedures for ranking the top n webpages for a given web graph, and lets the user choose which storage format to use.
+  - Serial main program. Allocates a 2D array of dimension M x N, assigned with appropriate integer values, and then calls the ``count_friends_of_ten`` to count the number of “triple-friends of 10” in the 2D array.   
+
+- **``mpi_main.c``**:
+  - MPI-parallelized main program. Master task allocates a 2D array of dimension M x N, assigned with appropriate integer values, and then calls the ``mpi_count_friends_of_ten`` to distribute array partitions to workers which counts and returns the number of “triple-friends of 10” in their respective partition. The total number of “triple-friends of 10” is found by sum reduction in the main program.
+
+- **``Makefile``**:
+  - Compile instructions for both the ``gcc`` (serial code) and ``mpicc`` (parallelized code) compiler.
+
+- **``run_serial_main.sh``**:
+  - Instructions for compiling and running the serial main program. Run with ``bash run_serial_main.sh``.
+
+- **``run_mpi_main_macos.sh``**:
+  - Instructions for compiling and running the MPI-parallelized main program on macOS. Run with ``bash run_mpi_main_macos.sh``.  
+
+- **``run_mpi_main_ifilinux.sh``**:
+  - Instructions for compiling and running the MPI-parallelized main program on IFI's standard Linux server. Run with ``bash run_mpi_main_ifilinux.sh``.   

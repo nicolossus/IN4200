@@ -16,11 +16,7 @@ DEP_SERIAL = src/helperfunc.h src/count_friends_of_ten.h
 OBJ_SERIAL = src/count_friends_of_ten.c
 
 DEP_MPI = src/helperfunc.h src/mpi_count_friends_of_ten.h
-#DEP_MPI = src/mpi_count_friends_of_ten.h
 OBJ_MPI = src/mpi_count_friends_of_ten.c
-
-#DEP = $(wildcard src/*.h)
-#OBJ = $(wildcard src/*.c)
 
 .PHONY : all clean
 

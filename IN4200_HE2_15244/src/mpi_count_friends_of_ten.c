@@ -44,8 +44,8 @@ int MPI_count_friends_of_ten(int M, int N, int** v)
     for (int slave=1; slave<=numslaves; slave++){
       // determine which rows to distribute to slave
       slave_rows = (slave <= rest) ? chunk+1 : chunk;
-      // allow the slave to "see" into the next partition if it is not last or
-      // will be out of bounds
+      // allow the slave to "see" into the next partition if it is not the last
+      // or will be out of bounds
       ghostpoints = (slave < (numslaves) && (M - offset - slave_rows) >= 2) ? 2 : 0;
       slave_rows += ghostpoints;
       MPI_Send(&ghostpoints, 1, MPI_INT, slave, FROM_MASTER, MPI_COMM_WORLD);
