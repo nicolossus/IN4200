@@ -21,7 +21,7 @@ This project was embarked on in collaboration with candidate 15224. Hence, our i
   - **``mpi_count_friends_of_ten.h``**
     - Header file for ``mpi_count_friends_of_ten.c``.    
   - **``helperfunc.h``**
-    - Header file containing helper functions for allocating, freeing and printing arrays
+    - Header file containing helper functions for allocating, freeing and printing arrays.
 
 - **``serial_main.c``**:
   - Serial main program. Allocates a 2D array of dimension M x N, assigned with appropriate integer values, and then calls the ``count_friends_of_ten`` to count the number of “triple-friends of 10” in the 2D array.   
@@ -40,3 +40,28 @@ This project was embarked on in collaboration with candidate 15224. Hence, our i
 
 - **``run_mpi_main_ifilinux.sh``**:
   - Instructions for compiling and running the MPI-parallelized main program on IFI's standard Linux server. Run with ``bash run_mpi_main_ifilinux.sh``.   
+
+
+### Compilation and Usage
+
+- **SERIAL MAIN PROGRAM**
+  - Compile:
+    - ``make serial_main.x``
+  - Run:
+    - ``./serial_main.x M N``
+  - Example: A 11 x 7 matrix.
+    - ``./serial_main.x 11 7``
+  - Test: Matrix with known number of friends:  
+    - ``./serial_main.x "test"``
+
+- **MPI-PARALLELIZED MAIN PROGRAM**
+  - Compile:
+    - ``make mpi_main.x``
+  - Run:
+    - ``mpirun -np <numprocs> mpi_main.x M N``
+  - Example: A 11 x 7 input matrix with 1 master and 3 workers
+    - ``mpirun -np 4 mpi_main.x 11 7``
+  - Test: Matrix with known number of friends:  
+    - ``mpirun -np 3 mpi_main.x "test"``  
+
+The MPI capable compiler on IFI's Linux server is ``/usr/lib64/openmpi/bin/mpicc``, and the command for executing a compiled MPI program is ``/usr/lib64/openmpi/bin/mpirun``.    
