@@ -12,12 +12,12 @@
 int main(int argc, char *argv[])
 //----------------------------------------------------------------------------
 // Find the total number of "triple-friends of 10" in a 2D array (matrix) of
-// dimension M x N
+// dimension M x N.
 //
 // Arguments given on command line
 // --------------------------------
-//
-//
+// Standard use: M (number of matrix rows) and N (number of matrix columns)
+// Test case: "test"
 //----------------------------------------------------------------------------
 {
 

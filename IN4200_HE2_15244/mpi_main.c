@@ -13,12 +13,17 @@
 int main(int argc, char **argv)
 //----------------------------------------------------------------------------
 // Find the total number of "triple-friends of 10" in a 2D array (matrix) of
-// dimension M x N
+// dimension M x N with MPI-parallelized code. Master task allocates the 2D
+// array, assigned with appropriate integer values, and then calls the
+// ``mpi_count_friends_of_ten`` to distribute array partitions to workers
+// which counts and returns the number of “triple-friends of 10” in their
+// respective partition. The total number of “triple-friends of 10” is found
+// by sum reduction in the main program.
 //
 // Arguments given on command line
 // --------------------------------
-//
-//
+// Standard use: M (number of matrix rows) and N (number of matrix columns)
+// Test case: "test"
 //----------------------------------------------------------------------------
 {
   int M=0, N=0, rank, friends, tot_friends;
