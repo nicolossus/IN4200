@@ -7,8 +7,6 @@
 // Include dependencies
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
-#include <time.h>
 
 //=============================================================================
 int alloc2D(int ***A, int M, int N)
@@ -121,7 +119,7 @@ void print_testmat(int** A)
 //=============================================================================
 void random_matrix(int*** A, int M, int N)
 //----------------------------------------------------------------------------
-// Assign 2D array random nonnegative integer values 0 - 9
+// Assign 2D array random nonnegative integer values 1 - 9
 //
 // Arguments
 // ---------
@@ -131,7 +129,7 @@ void random_matrix(int*** A, int M, int N)
 	zeros2D(A, M, N);
 	for (size_t i=0; i<M; i++) {
 		for (size_t j=0; j<N; j++) {
-			(*A)[i][j] = (rand() % 10);
+			(*A)[i][j] = (rand() % 9) + 1;
 		}
 	}
 }

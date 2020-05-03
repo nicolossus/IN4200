@@ -5,7 +5,7 @@
 #include "src/mpi_count_friends_of_ten.h"
 #include "src/helperfunc.h"
 
-#define MASTER 0               /* taskid of first task */
+#define MASTER 0   // taskid of first task
 
 //============================================================================
 //-------------------------------- MAIN --------------------------------------
@@ -27,10 +27,26 @@ int main(int argc, char **argv)
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
   if (rank == MASTER) {
-    M = atoi(argv[1]);
-		N = atoi(argv[2]);
-    //random_matrix(&v, M, N);
-    test_matrix(&v);
+    if (strcmp(argv[1], "test") == 0) {
+      M = 4;
+  		N = 5;
+      test_matrix(&v);
+  		printf("\nTest matrix with 7 friends of 10:\n");
+  		print_testmat(v);
+  	}
+    else{
+      M = atoi(argv[1]);
+  		N = atoi(argv[2]);
+      random_matrix(&v, M, N);
+      if ((M*N) < 101) {
+  			printf("\nRandom %d x %d matrix:\n", M, N);
+  			printmat(v, M, N);
+  		}
+  		else
+  		{
+  			printf("\nGenerating a %d x %d random matrix\n", M, N);
+  		}
+    }
   }
 
   friends = MPI_count_friends_of_ten(M, N, v);
@@ -42,6 +58,8 @@ int main(int argc, char **argv)
   }
   MPI_Reduce(&friends, &tot_friends, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
 
+  // Attempt to synchronize output with barrier, although output ordering is not
+  // guaranteed in MPI programs.
   MPI_Barrier(MPI_COMM_WORLD);
   if (rank == MASTER){
     printf("MASTER: My slaves found total of triple friends: %d\n", tot_friends);
