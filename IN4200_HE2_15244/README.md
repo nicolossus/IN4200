@@ -13,11 +13,11 @@ This project was embarked on in collaboration with candidate 15224. Hence, our i
 
 - The **``src``** folder contains:
   - **``count_friends_of_ten.c``**
-    - Serial function that that returns the total number of “triple-friends of 10” inside the input 2D array of dimension M x N.
+    - Serial function that returns the total number of “triple-friends of 10” inside the input 2D array of dimension M x N.
   - **``count_friends_of_ten.h``**
     - Header file for ``count_friends_of_ten.c``.  
   - **``mpi_count_friends_of_ten.c``**
-    - MPI-parallelized function that that returns the number of “triple-friends of 10” inside a partition of the input 2D array assigned to worker by the master task.
+    - MPI-parallelized function that returns the number of “triple-friends of 10” inside a partition of the input 2D array assigned to worker by the master task.
   - **``mpi_count_friends_of_ten.h``**
     - Header file for ``mpi_count_friends_of_ten.c``.    
   - **``helperfunc.h``**
